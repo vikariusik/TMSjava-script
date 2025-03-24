@@ -14,14 +14,14 @@ console.log(`Variable: ${v5} have type: ${typeof v5}`);
 
 let height = 15;
 let width = 20;
-let result = height > width ? "height" : "width";
+let result = height > width ? height : width;
 
 console.log("The biggest - " + result);
 
 //3
 console.log("Числа кратные 3м:");
 
-for (let i = 1; i <= 21; i++) {
+for (let i = 1; i <= 20; i++) {
   if (i % 3 === 0) {
     console.log(i);
   }
