@@ -52,6 +52,6 @@ console.log('Индекс числа 8 в итоговом массиве ', ind
 
 //7
 const binary = [0, 0, 0, 0]
-const transformedString = binary.map(() => "01").join('')
+const transformedString = binary.join('1')
 
 console.log(transformedString)
