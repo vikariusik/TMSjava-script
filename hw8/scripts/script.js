@@ -1,3 +1,6 @@
+import { getData, createTodoItem  } from './helpers.js';
+import { Todo } from './Todo.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root');
 
@@ -20,16 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   root.appendChild(controlsDiv);
 
-  class Todo {
-    constructor(id, date, text, isChecked) {
-      this.id = id;
-      this.date = date;
-      this.text = text;
-      this.isChecked = isChecked;
-    }
-  }
-
-
   let todos = [];
   todos = getData()
 
@@ -39,54 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const todoItemDiv = createTodoItem(todo);
     root.appendChild(todoItemDiv);
   });
-
-  // --- Helper Functions ---
-
-  function getData() {
-    const data = localStorage.getItem('todos');
-    if (data !== null)
-    {
-      return JSON.parse(data);
-    }
-    return [];
-  }
-
-  function createTodoItem(todo) {
-    const todoItemDiv = document.createElement('div');
-    todoItemDiv.className = 'todo-item';
-    if (!todo.isChecked)
-    {
-      todoItemDiv.classList.add('completed'); 
-    }
-    todoItemDiv.id = todo.id
-
-    const completeButton = document.createElement('button');
-    completeButton.className = 'complete-button';
-    completeButton.textContent = '✓'; 
-    todoItemDiv.appendChild(completeButton);
-
-    const todoTextDiv = document.createElement('div');
-    todoTextDiv.className = 'todo-text';
-    todoTextDiv.textContent = todo.text;
-    todoItemDiv.appendChild(todoTextDiv);
-
-    const dateDeleteDiv = document.createElement('div');
-    dateDeleteDiv.className = 'date-delete-wrapper'
-    todoItemDiv.appendChild(dateDeleteDiv)
-
-    const deleteButton = document.createElement('button');
-    deleteButton.className = 'delete-button';
-    deleteButton.textContent = 'X';
-    dateDeleteDiv.appendChild(deleteButton);
-    
-    const dateSpan = document.createElement('div');
-    dateSpan.className = 'date';
-    dateSpan.textContent = todo.date;
-
-    dateDeleteDiv.appendChild(dateSpan);
-
-    return todoItemDiv;
-  }
 
   // --- Event Listeners ---
 
@@ -98,8 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
   addButton.addEventListener('click', () => {
     const newTodoText = todoInput.value.trim();
     if (newTodoText !== '') {
-      const date = new Date().toLocaleDateString();
-      const todo = new Todo(++lastId, date, newTodoText, true);
+      const todo = new Todo(++lastId, newTodoText);
       todos.push(todo);
 
       const newTodoItem = createTodoItem(todo);
@@ -114,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
     todos = [];
   });
 
-
   root.addEventListener('click', (event) => {
     if (event.target.classList.contains('complete-button')) {
       const todoItem = event.target.closest('.todo-item'); 
@@ -127,5 +70,4 @@ document.addEventListener('DOMContentLoaded', () => {
       todos.splice(todos.findIndex(t => t.id == todoItem.id),1)
     }
   });
-
 });
