@@ -3,6 +3,6 @@ export class Todo {
       this.id = id;
       this.date = new Date().toLocaleDateString();
       this.text = text;
-      this.isChecked = true;
+      this.isChecked = false;
     }
   }

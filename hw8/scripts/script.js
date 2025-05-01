@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       todoItem.classList.toggle('completed'); // Toggle 'completed' class
       let todo = todos.find(t => t.id == todoItem.id);
       todo.isChecked = !todo.isChecked;
+      event.target.textContent = todo.isChecked ? '✓' : '';
     } else if (event.target.classList.contains('delete-button')) {
       const todoItem = event.target.closest('.todo-item');
       todoItem.remove();

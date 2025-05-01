@@ -13,14 +13,14 @@ function getData() {
 
    const todoItemDiv = document.createElement('div');
    todoItemDiv.className = 'todo-item';
-   if (!isChecked) {
+   if (isChecked) {
      todoItemDiv.classList.add('completed');
    }
    todoItemDiv.id = id;
  
    const completeButton = document.createElement('button');
    completeButton.className = 'complete-button';
-   completeButton.textContent = '✓';
+   completeButton.textContent = isChecked ? '✓' : '';
  
    const todoTextDiv = document.createElement('div');
    todoTextDiv.className = 'todo-text';
