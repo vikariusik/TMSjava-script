@@ -21,6 +21,7 @@ const PostContainer: React.FC = () => {
     const fetchPosts = async () => {
       try {
         await new Promise((resolve) => setTimeout(resolve, 2000));
+        
         const response = await fetch('https://studapi.teachmeskills.by/blog/posts/');
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
