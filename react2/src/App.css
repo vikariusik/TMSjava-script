@@ -1,0 +1,49 @@
+#root {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  background-color: #001e5a;
+  padding: 1rem;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-button {
+  background-color: #61dafb;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.menu-button:hover {
+  background-color: #21a1f1;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f9f9f9;
+}
+
+.app-footer {
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+}
+
+
