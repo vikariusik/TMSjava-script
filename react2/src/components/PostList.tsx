@@ -1,15 +1,6 @@
 import React from 'react';
 import PostCard from './PostCard';
-
-interface Post {
-  id: number;
-  image?: string;
-  text: string;
-  date: string;
-  lesson_num: number;
-  title: string;
-  author: number;
-}
+import type { Post } from '../types/Post';
 
 interface PostListProps {
   posts: Post[];
