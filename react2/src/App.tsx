@@ -2,7 +2,8 @@ import "./App.css";
 import PostContainer from "./components/PostContainer";
 import LoginPage from "./components/LoginPage";
 import SinglePostPage from "./components/SinglePostPage";
-import { useState, useEffect } from "react";
+import Header from "./components/Header"; // Import the new Header component
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -24,23 +25,7 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <header className="app-header">
-          {isLoggedIn && (
-            <>
-              <button onClick={handleLogoutClick} className="menu-button">
-                Logout
-              </button>
-              <button
-                onClick={() => {
-                  window.location.href = "/posts";
-                }}
-                className="menu-button"
-              >
-                Go to Posts
-              </button>
-            </>
-          )}
-        </header>
+        <Header isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
         <main className="app-main">
           <Routes>
             <Route
