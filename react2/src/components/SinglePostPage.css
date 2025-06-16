@@ -1,0 +1,22 @@
+.single-post-page {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  text-align: left;
+}
+
+.single-post-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.single-post-page h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.single-post-page p {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}

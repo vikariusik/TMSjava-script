@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import PostList from './PostList';
-import type { Post } from '../types/Post';
-import './PostContainer.css';
+import React, { useEffect, useState } from "react";
+import PostList from "./PostList";
+import type { Post } from "../types/Post";
+import "./PostContainer.css";
+import Title from "./Title";
 
 const PostContainer: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -11,7 +12,9 @@ const PostContainer: React.FC = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch('https://studapi.teachmeskills.by/blog/posts/');
+        const response = await fetch(
+          "https://studapi.teachmeskills.by/blog/posts/"
+        );
         if (!response.ok) {
           throw new Error(`Error: ${response.status}`);
         }
@@ -35,7 +38,12 @@ const PostContainer: React.FC = () => {
     return <div>Error loading posts: {error}</div>;
   }
 
-  return <PostList posts={posts} />;
+  return (
+    <>
+      <Title text="Posts" />
+      <PostList posts={posts} />
+    </>
+  );
 };
 
 export default PostContainer;
