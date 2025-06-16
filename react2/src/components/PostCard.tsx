@@ -15,13 +15,11 @@ interface PostCardProps {
 const PostCard: React.FC<PostCardProps> = ({ id, image, text, date, lesson_num, title, author }) => {
   return (
     <div className="post-card">
-      {image && <img src={image} alt={title} className="post-card-image" />}
+      {image && <img src={image} alt={title} className="post-card_image" />}
+      <div  className="post-card_date">Date: {date}</div>
       <h2>{title}</h2>
-      <p>{text}</p>
-      <p><strong>Date:</strong> {date}</p>
-      <p><strong>Lesson:</strong> {lesson_num}</p>
-      <p><strong>Author ID:</strong> {author}</p>
-      <Link to={`/post/${id}`} className="post-card-link">Read More</Link>
+      <div className="post-card_text">{text}</div>
+      <Link to={`/post/${id}`} className="post-card_link">Read More</Link>
     </div>
   );
 };

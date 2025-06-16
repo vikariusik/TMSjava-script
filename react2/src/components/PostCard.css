@@ -12,7 +12,7 @@
   transform: scale(1.05);
 }
 
-.post-card-image {
+.post-card_image {
   width: 300px;
   height: 300px;
   object-fit: cover; 
@@ -25,12 +25,12 @@
   color: #333;
 }
 
-.post-card-date {
-  font-size: 1rem;
+.post-card_date {
+  font-size: 0.6rem;
   margin: 8px 0;
   color: #666;
 }
 
-.post-card-text {
+.post-card_text {
   color: #000;
 }

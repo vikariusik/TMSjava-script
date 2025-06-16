@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './SinglePostPage.css';
-
-interface Post {
-  id: number;
-  image?: string;
-  text: string;
-  date: string;
-  lesson_num: number;
-  title: string;
-  author: number;
-}
+import type { Post } from '../types/Post';
 
 const SinglePostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -50,13 +41,11 @@ const SinglePostPage: React.FC = () => {
   }
 
   return (
-    <div className="single-post-page">
-      {post.image && <img src={post.image} alt={post.title} className="single-post-image" />}
+    <div className="single-post__page">
+      {post.image && <img src={post.image} alt={post.title} className="single-post__image" />}
       <h1>{post.title}</h1>
-      <p>{post.text}</p>
-      <p><strong>Date:</strong> {post.date}</p>
-      <p><strong>Lesson:</strong> {post.lesson_num}</p>
-      <p><strong>Author ID:</strong> {post.author}</p>
+      <div>{post.text}</div>
+      <div className="single-post__date">Date:{post.date}</div>
     </div>
   );
 };

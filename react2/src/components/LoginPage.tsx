@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import './LoginPage.css';
 
 interface LoginPageProps {
@@ -9,10 +8,23 @@ interface LoginPageProps {
 const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [loginError, setLoginError] = useState<string | null>(null);
+
+  const users = [
+    { username: 'admin', password: '12345' },
+    { username: '1', password: '1' }
+  ];
 
   const handleLogin = () => {
-    setIsLoggedIn(true); // Update the login state
+    // Check if the entered username and password match any user in the array
+    const user = users.find((u) => u.username === username && u.password === password);
+
+    if (user) {
+      setIsLoggedIn(true); // Update the login state
+      setLoginError(null); // Clear any previous error
+    } else {
+      setLoginError('Invalid username or password'); // Set error message
+    }
   };
 
   return (
@@ -37,6 +49,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
           Login
         </button>
       </form>
+      {loginError && <div className="login-error">{loginError}</div>}
     </div>
   );
 };
