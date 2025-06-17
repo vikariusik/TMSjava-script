@@ -1,32 +1,33 @@
 import "./App.css";
-import PostContainer from "./components/PostsPage";
+import PostsPage from "./components/PostsPage";
 import LoginPage from "./components/LoginPage";
 import RegistrationPage from "./components/RegistrationPage";
 import SinglePostPage from "./components/SinglePostPage";
 import SearchResultsPage from "./components/SearchResultsPage";
 import Header from "./components/Header";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-function App() {
-  // Initialize isLoggedIn from localStorage
+const AppContent: React.FC = () => {
+  const { isDarkMode } = useTheme();
   const [isLoggedIn, setIsLoggedIn] = useState(() => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
 
   const handleLogoutClick = () => {
     setIsLoggedIn(false);
-    localStorage.setItem("isLoggedIn", "false"); // Clear login state in localStorage
+    localStorage.setItem("isLoggedIn", "false");
   };
 
   const handleLogin = () => {
     setIsLoggedIn(true);
-    localStorage.setItem("isLoggedIn", "true"); // Save login state in localStorage
+    localStorage.setItem("isLoggedIn", "true");
   };
 
   return (
     <Router>
-      <div className="app">
+      <div className={`app ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
         <Header isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
         <main className="app-main">
           <Routes>
@@ -36,7 +37,7 @@ function App() {
                 !isLoggedIn ? (
                   <LoginPage setIsLoggedIn={handleLogin} />
                 ) : (
-                  <PostContainer />
+                  <PostsPage />
                 )
               }
             />
@@ -50,7 +51,7 @@ function App() {
                 !isLoggedIn ? (
                   <LoginPage setIsLoggedIn={handleLogin} />
                 ) : (
-                  <PostContainer />
+                  <PostsPage />
                 )
               }
             />
@@ -81,6 +82,14 @@ function App() {
         </footer>
       </div>
     </Router>
+  );
+};
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

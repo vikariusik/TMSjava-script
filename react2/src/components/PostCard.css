@@ -2,10 +2,17 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  background-color: #f3f3f3;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
   padding: 16px;
+}
+
+.dark-theme .post-card {
+  background-color: #282c34;
+}
+
+.light-theme .post-card {
+  background-color: white;
 }
 
 .post-card:hover {
@@ -22,15 +29,9 @@
 .post-card h2 {
   font-size: 1.5rem;
   margin: 0 0 8px;
-  color: #333;
 }
 
 .post-card_date {
   font-size: 0.6rem;
   margin: 8px 0;
-  color: #666;
-}
-
-.post-card_text {
-  color: #000;
 }

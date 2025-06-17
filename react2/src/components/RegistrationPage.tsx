@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RegistrationPage.css';
 
-interface RegistrationPageProps {
-  setIsLoggedIn: (value: boolean) => void;
-}
-
-const RegistrationPage: React.FC<RegistrationPageProps> = ({ setIsLoggedIn }) => {
+const RegistrationPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');

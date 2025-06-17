@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTheme } from "../context/ThemeContext";
 import './Header.css';
 
 interface HeaderProps {
@@ -9,6 +10,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleGoToRegistration = () => {
@@ -61,6 +63,11 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
           </form>
         </div>
       )}
+            <div className="header-right">
+        <button onClick={toggleTheme} className="theme-toggle-button">
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
+      </div>
     </header>
   );
 };

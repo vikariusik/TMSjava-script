@@ -50,16 +50,44 @@
 }
 
 
-.app-main {
-  flex: 1;
-  padding: 2rem;
+/* Light Theme */
+.light-theme {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+.light-theme .app-header {
+  background-color: #282c34;
+  color: white;
+}
+
+.light-theme .app-main {
   background-color: #f9f9f9;
 }
 
-.app-footer {
+.light-theme .app-footer {
   background-color: #282c34;
   color: white;
-  text-align: center;
+}
+
+/* Dark Theme */
+.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.dark-theme .app-header {
+  background-color: #000000;
+  color: #e0e0e0;
+}
+
+.dark-theme .app-main {
+  background-color: #2d2d2d;
+}
+
+.dark-theme .app-footer {
+  background-color: #000000;
+  color: #e0e0e0;
 }
 
 
