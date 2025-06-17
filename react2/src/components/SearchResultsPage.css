@@ -3,11 +3,6 @@
   min-height: 100vh;
 }
 
-.search-results-page h1 {
-  color: #333;
-  margin-bottom: 1rem;
-}
-
 .search-query {
   font-size: 1.1rem;
   color: #666;
