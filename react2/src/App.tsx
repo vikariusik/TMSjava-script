@@ -1,8 +1,9 @@
 import "./App.css";
 import PostContainer from "./components/PostContainer";
 import LoginPage from "./components/LoginPage";
+import RegistrationPage from "./components/RegistrationPage";
 import SinglePostPage from "./components/SinglePostPage";
-import Header from "./components/Header"; // Import the new Header component
+import Header from "./components/Header";
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -37,6 +38,10 @@ function App() {
                   <PostContainer />
                 )
               }
+            />
+            <Route
+              path="/registration"
+              element={<RegistrationPage setIsLoggedIn={handleLogin} />}
             />
             <Route
               path="/posts"

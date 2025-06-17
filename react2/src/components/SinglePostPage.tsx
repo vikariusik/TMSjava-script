@@ -45,7 +45,7 @@ const SinglePostPage: React.FC = () => {
       {post.image && <img src={post.image} alt={post.title} className="single-post__image" />}
       <h1>{post.title}</h1>
       <div>{post.text}</div>
-      <div className="single-post__date">Date:{post.date}</div>
+      <div className="single-post__date">Date: {post.date}</div>
     </div>
   );
 };
