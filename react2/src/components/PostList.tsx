@@ -1,6 +1,7 @@
 import React from 'react';
 import PostCard from './PostCard';
 import type { Post } from '../types/Post';
+import './PostList.css'
 
 interface PostListProps {
   posts: Post[];

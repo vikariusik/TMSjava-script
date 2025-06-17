@@ -83,10 +83,10 @@ const RegistrationPage: React.FC<RegistrationPageProps> = ({ setIsLoggedIn }) =>
           onChange={(e) => setPassword(e.target.value)}
           className="registration-input"
         />
-        <button onClick={handleRegistration} className="menu-button">
+        <button onClick={handleRegistration} className="primary-button">
           Register
         </button>
-        <button onClick={handleGoToLogin} className="login-link-button">
+        <button onClick={handleGoToLogin} className="secondary-button">
           Already have an account? Login
         </button>
       </form>

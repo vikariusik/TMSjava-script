@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import PostList from './PostList';
 import type { Post } from '../types/Post';
 import './SearchResultsPage.css';
+import { fakePosts } from '../data/fakePosts';
 
 const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -21,8 +22,11 @@ const SearchResultsPage: React.FC = () => {
         }
         const data = await response.json();
         
+        // Combine API posts with fake posts
+        const allPosts = [...data.results, ...fakePosts];
+        
         // Filter posts based on search query
-        const filteredPosts = data.results.filter((post: Post) =>
+        const filteredPosts = allPosts.filter((post: Post) =>
           post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
           post.text.toLowerCase().includes(searchQuery.toLowerCase())
         );

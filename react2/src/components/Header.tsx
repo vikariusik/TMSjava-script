@@ -31,15 +31,15 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
       <div className="header-left">
         {isLoggedIn ? (
           <>
-            <button onClick={handleLogoutClick} className="menu-button">
+            <button onClick={handleLogoutClick} className="primary-button">
               Logout
             </button>
-            <button onClick={handleGoToPosts} className="menu-button">
+            <button onClick={handleGoToPosts} className="primary-button">
               Go to Posts
             </button>
           </>
         ) : (
-          <button onClick={handleGoToRegistration} className="menu-button">
+          <button onClick={handleGoToRegistration} className="primary-button">
             Register
           </button>
         )}
@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
             />
-            <button type="submit" className="menu-button">
+            <button type="submit" className="primary-button">
               Search
             </button>
           </form>

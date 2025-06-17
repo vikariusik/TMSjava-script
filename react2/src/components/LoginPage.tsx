@@ -62,10 +62,10 @@ const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
           onChange={(e) => setPassword(e.target.value)}
           className="login-input"
         />
-        <button onClick={handleLogin} className="login-button">
+        <button onClick={handleLogin} className="primary-button">
           Login
         </button>
-        <button onClick={handleGoToRegistration} className="registration-link-button">
+        <button onClick={handleGoToRegistration} className="secondary-button">
           Don't have an account? Register
         </button>
       </form>

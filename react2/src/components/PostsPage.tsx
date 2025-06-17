@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PostList from "./PostList";
 import type { Post } from "../types/Post";
-import "./PostContainer.css";
+import "./PostsPage.css";
 import Title from "./Title";
+import { fakePosts } from "../data/fakePosts";
 
 const PostContainer: React.FC = () => {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -19,7 +20,9 @@ const PostContainer: React.FC = () => {
           throw new Error(`Error: ${response.status}`);
         }
         const data = await response.json();
-        setPosts(data.results);
+        const allPosts = [...data.results, ...fakePosts];
+        setPosts(allPosts);
+        
       } catch (err) {
         setError(err.message);
       } finally {
