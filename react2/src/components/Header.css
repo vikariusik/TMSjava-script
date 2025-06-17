@@ -1,0 +1,35 @@
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #282c34;
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 500px;
+  margin: 0 2rem;
+}
+
+.search-form {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}

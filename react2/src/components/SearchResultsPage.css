@@ -1,0 +1,43 @@
+.search-results-page {
+  padding: 2rem;
+  background-color: #f9f9f9;
+  min-height: 100vh;
+}
+
+.search-results-page h1 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.search-query {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.search-count {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-top: 2rem;
+}
+
+.search-loading {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #666;
+  padding: 2rem;
+}
+
+.search-error {
+  text-align: center;
+  color: red;
+  font-size: 1.1rem;
+  padding: 2rem;
+}

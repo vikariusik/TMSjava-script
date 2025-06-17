@@ -1,8 +1,9 @@
 import "./App.css";
-import PostContainer from "./components/PostContainer";
+import PostContainer from "./components/PostsPage";
 import LoginPage from "./components/LoginPage";
 import RegistrationPage from "./components/RegistrationPage";
 import SinglePostPage from "./components/SinglePostPage";
+import SearchResultsPage from "./components/SearchResultsPage";
 import Header from "./components/Header";
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -50,6 +51,16 @@ function App() {
                   <LoginPage setIsLoggedIn={handleLogin} />
                 ) : (
                   <PostContainer />
+                )
+              }
+            />
+            <Route
+              path="/search"
+              element={
+                !isLoggedIn ? (
+                  <LoginPage setIsLoggedIn={handleLogin} />
+                ) : (
+                  <SearchResultsPage />
                 )
               }
             />

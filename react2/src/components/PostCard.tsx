@@ -7,12 +7,10 @@ interface PostCardProps {
   image?: string;
   text: string;
   date: string;
-  lesson_num: number;
   title: string;
-  author: number;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ id, image, text, date, lesson_num, title, author }) => {
+const PostCard: React.FC<PostCardProps> = ({ id, image, text, date, title }) => {
   return (
     <div className="post-card">
       {image && <img src={image} alt={title} className="post-card_image" />}
