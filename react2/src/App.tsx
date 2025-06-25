@@ -7,7 +7,8 @@ import SearchResultsPage from "./components/SearchResultsPage";
 import Header from "./components/Header";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 
 const AppContent: React.FC = () => {
   const { isDarkMode } = useTheme();
@@ -27,54 +28,30 @@ const AppContent: React.FC = () => {
 
   return (
     <Router>
-      <div className={`app ${isDarkMode ? 'dark-theme' : 'light-theme'}`}>
+      <div className={`app ${isDarkMode ? "dark-theme" : "light-theme"}`}>
         <Header isLoggedIn={isLoggedIn} handleLogoutClick={handleLogoutClick} />
         <main className="app-main">
           <Routes>
-            <Route
-              path="/"
-              element={
-                !isLoggedIn ? (
-                  <LoginPage setIsLoggedIn={handleLogin} />
-                ) : (
-                  <PostsPage />
-                )
-              }
-            />
-            <Route
-              path="/registration"
-              element={<RegistrationPage setIsLoggedIn={handleLogin} />}
-            />
-            <Route
-              path="/posts"
-              element={
-                !isLoggedIn ? (
-                  <LoginPage setIsLoggedIn={handleLogin} />
-                ) : (
-                  <PostsPage />
-                )
-              }
-            />
-            <Route
-              path="/search"
-              element={
-                !isLoggedIn ? (
-                  <LoginPage setIsLoggedIn={handleLogin} />
-                ) : (
-                  <SearchResultsPage />
-                )
-              }
-            />
-            <Route
-              path="/post/:id"
-              element={
-                !isLoggedIn ? (
-                  <LoginPage setIsLoggedIn={handleLogin} />
-                ) : (
-                  <SinglePostPage />
-                )
-              }
-            />
+            <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/login" element={<LoginPage setIsLoggedIn={handleLogin} />} />
+            <Route element={<PrivateRoute />}>
+              <Route
+                path="/posts"
+                element={<PostsPage />}
+              />
+              <Route
+                path="/search"
+                element={<SearchResultsPage />}
+              />
+              <Route
+                path="/post/:id"
+                element={<SinglePostPage />}
+              />
+              <Route
+                path="*"
+                element={<PostsPage />}
+              />
+            </Route>
           </Routes>
         </main>
         <footer className="app-footer">

@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
-interface LoginPageProps {
-  setIsLoggedIn: (value: boolean) => void;
-}
-
-const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
+const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = () => {
@@ -25,20 +22,24 @@ const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn }) => {
     const allUsers = [...defaultUsers, ...registeredUsers];
 
     // Check if the entered username and password match any user
-    const user = allUsers.find((u) => u.username === username && u.password === password);
+    const foundUser = allUsers.find((u) => u.username === username && u.password === password);
+    
+    setUser(foundUser || null);
+  };
 
+  useEffect(() => {
     if (user) {
-      setIsLoggedIn(true); // Update the login state
+      localStorage.setItem("isLoggedIn", "true"); // Update the login state
       setLoginError(null); // Clear any previous error
       
       // Save current user to localStorage
       localStorage.setItem('currentUser', JSON.stringify(user));
       
       navigate('/posts'); // Navigate to posts page
-    } else {
+    } else if (user === null && (username || password)) {
       setLoginError('Invalid username or password'); // Set error message
     }
-  };
+  }, [user, username, password]);
 
   const handleGoToRegistration = () => {
     navigate('/registration');
