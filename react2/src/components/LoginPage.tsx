@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
-const LoginPage: React.FC = () => {
+interface LoginPageProps {
+  setIsLoggedIn: (value: boolean) => void;
+}
+
+const LoginPage: React.FC<LoginPageProps> = ({ setIsLoggedIn })  => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState<string | null>(null);
@@ -29,6 +33,7 @@ const LoginPage: React.FC = () => {
 
   useEffect(() => {
     if (user) {
+      setIsLoggedIn(true); // Update the login state
       localStorage.setItem("isLoggedIn", "true"); // Update the login state
       setLoginError(null); // Clear any previous error
       

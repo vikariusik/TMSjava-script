@@ -1,10 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './counterSlice'
 import { useDispatch, useSelector } from 'react-redux'
+import usersReducer from './userSlice'
+import imageReducer from './ImageSlice'
+
 
 export const store = configureStore({
   reducer: {
-    counter : counterReducer
+    counter : counterReducer,
+    users : usersReducer,
+    image: imageReducer,
   }
 })
 
