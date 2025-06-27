@@ -3,40 +3,40 @@ import { Link } from 'react-router-dom';
 import './PostCard.css';
 import { useAppDispatch } from '../store/store';
 import { openImageModal } from '../store/ImageSlice';
+import BookmarkButton from './BookmarkButton';
+import type { Post } from '../types/Post';
 
 interface PostCardProps {
-  id: number;
-  image?: string;
-  text: string;
-  date: string;
-  title: string;
+  post: Post;
 }
 
-const PostCard: React.FC<PostCardProps> = ({ id, image, text, date, title }) => {
+const PostCard: React.FC<PostCardProps> = ({ post }) => {
   const dispatch = useAppDispatch();
 
   const handleImageClick = (e: React.MouseEvent) => {
     e.preventDefault(); // Предотвращаем переход по ссылке
     e.stopPropagation(); // Останавливаем всплытие события
-    if (image) {
-      dispatch(openImageModal(image));
+    if (post.image) {
+      dispatch(openImageModal(post.image));
     }
   };
 
   return (
-    <Link to={`/post/${id}`} className="post-card">
-      {image && (
-        <img 
-          src={image} 
-          alt={title} 
-          className="post-card_image" 
-          onClick={handleImageClick}
-        />
-      )}
-      <div className="post-card_date">Date: {date}</div>
-      <h2>{title}</h2>
-      <div className="post-card_text">{text}</div>
-      <span className="post-card_read-more">Read More</span>
+    <Link to={`/post/${post.id}`} className="post-card">
+      <div className="post-card-header">
+        {post.image && (
+          <img 
+            src={post.image} 
+            alt={post.title} 
+            className="post-card_image" 
+            onClick={handleImageClick}
+          />
+        )}
+        <BookmarkButton post={post} className="post-card-bookmark" />
+      </div>
+      <div className="post-card_date">Date: {post.date}</div>
+      <h2>{post.title}</h2>
+      <div className="post-card_text">{post.text}</div>
     </Link>
   );
 };

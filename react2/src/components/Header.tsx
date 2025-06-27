@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
+import { useAppSelector } from "../store/store";
 import './Header.css';
 
 interface HeaderProps {
@@ -12,6 +13,7 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const bookmarkedPosts = useAppSelector((state) => state.bookmarks.bookmarkedPosts);
 
   const handleGoToRegistration = () => {
     navigate('/registration');
@@ -64,6 +66,12 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
         </div>
       )}
             <div className="header-right">
+        {isLoggedIn && bookmarkedPosts.length > 0 && (
+          <div className="bookmarks-indicator">
+            <span className="bookmark-icon">★</span>
+            <span className="bookmark-count">{bookmarkedPosts.length}</span>
+          </div>
+        )}
         <button onClick={toggleTheme} className="theme-toggle-button">
           {isDarkMode ? '☀️' : '🌙'}
         </button>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './SinglePostPage.css';
 import type { Post } from '../types/Post';
+import BookmarkButton from './BookmarkButton';
 
 const SinglePostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,7 +20,7 @@ const SinglePostPage: React.FC = () => {
         const data = await response.json();
         setPost(data);
       } catch (err) {
-        setError(err.message);
+        setError(err instanceof Error ? err.message : 'Unknown error');
       } finally {
         setLoading(false);
       }
@@ -42,7 +43,10 @@ const SinglePostPage: React.FC = () => {
 
   return (
     <div className="single-post__page">
-      {post.image && <img src={post.image} alt={post.title} className="single-post__image" />}
+      <div className="single-post__header">
+        {post.image && <img src={post.image} alt={post.title} className="single-post__image" />}
+        <BookmarkButton post={post} className="single-post__bookmark" />
+      </div>
       <h1>{post.title}</h1>
       <div>{post.text}</div>
       <div className="single-post__date">Date: {post.date}</div>

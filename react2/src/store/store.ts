@@ -3,6 +3,7 @@ import counterReducer from './counterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import usersReducer from './userSlice'
 import imageReducer from './ImageSlice'
+import bookmarksReducer from './bookmarksSlice'
 
 
 export const store = configureStore({
@@ -10,6 +11,7 @@ export const store = configureStore({
     counter : counterReducer,
     users : usersReducer,
     image: imageReducer,
+    bookmarks: bookmarksReducer,
   }
 })
 

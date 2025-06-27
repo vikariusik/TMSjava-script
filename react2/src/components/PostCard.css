@@ -37,3 +37,18 @@
   font-size: 0.6rem;
   margin: 8px 0;
 }
+
+.post-card-header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.post-card-bookmark {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+}
