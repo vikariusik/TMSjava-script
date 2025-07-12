@@ -4,7 +4,7 @@ import './ImageModal.css';
 import { useAppDispatch, useAppSelector } from '../store/store';
 
 const ImageModal: React.FC = () => {
-  const { selectedImage, isModalOpen } = useAppSelector((state) => state.image);
+  const { selectedImage} = useAppSelector((state) => state.image);
   const dispatch = useAppDispatch();
 
   const handleClose = () => {
@@ -17,7 +17,7 @@ const ImageModal: React.FC = () => {
     }
   };
 
-  if (!isModalOpen || !selectedImage) {
+  if (!selectedImage) {
     return null;
   }
 

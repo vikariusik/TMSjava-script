@@ -9,7 +9,7 @@ interface HeaderProps {
   handleLogoutClick: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, handleLogoutClick }) => {
+const Header = ({ isLoggedIn, handleLogoutClick }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();

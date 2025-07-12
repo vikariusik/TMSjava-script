@@ -2,12 +2,10 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface ImageState {
   selectedImage: string | null;
-  isModalOpen: boolean;
 }
 
 const initialState: ImageState = {
-  selectedImage: null,
-  isModalOpen: false,
+  selectedImage: null
 };
 
 const imageSlice = createSlice({
@@ -16,11 +14,9 @@ const imageSlice = createSlice({
   reducers: {
     openImageModal: (state, action: PayloadAction<string>) => {
       state.selectedImage = action.payload;
-      state.isModalOpen = true;
     },
     closeImageModal: (state) => {
       state.selectedImage = null;
-      state.isModalOpen = false;
     },
   },
 });
