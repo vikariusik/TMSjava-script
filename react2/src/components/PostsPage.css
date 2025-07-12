@@ -1,0 +1,100 @@
+.posts-with-tabs {
+  width: 100%;
+}
+
+.tabs-container {
+  display: flex;
+  border-bottom: 2px solid #e0e0e0;
+  margin-bottom: 2rem;
+  gap: 0;
+  align-items: center;
+}
+
+.tab-button {
+  background: none;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #666;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.tab-button:hover {
+  color: #333;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tab-button.active {
+  color: #007bff;
+  border-bottom-color: #007bff;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.clear-bookmarks-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-left: auto;
+  margin-right: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.clear-bookmarks-button:hover {
+  background-color: #c82333;
+}
+
+.clear-bookmarks-button:focus {
+  outline: 2px solid #dc3545;
+  outline-offset: 2px;
+}
+
+.dark-theme .tab-button {
+  color: #ccc;
+}
+
+.dark-theme .tab-button:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .tab-button.active {
+  color: #4dabf7;
+  border-bottom-color: #4dabf7;
+  background-color: rgba(77, 171, 247, 0.2);
+}
+
+.dark-theme .tabs-container {
+  border-bottom-color: #444;
+}
+
+.tab-content {
+  min-height: 400px;
+}
+
+.empty-bookmarks {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #666;
+}
+
+.empty-bookmarks p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.empty-bookmarks p:first-child {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.dark-theme .empty-bookmarks {
+  color: #ccc;
+}
