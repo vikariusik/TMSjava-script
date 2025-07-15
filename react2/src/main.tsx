@@ -4,8 +4,8 @@ import './index.css'
 import App from './App.tsx'
 import { Provider } from 'react-redux'
 import { store } from './store/store.ts'
-import HomePage from './components/HomePage.tsx'
-import UserPage from './components/UserPage.tsx'
+import HomePage from './pages/HomePage.tsx'
+import UserPage from './pages/UserPage.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

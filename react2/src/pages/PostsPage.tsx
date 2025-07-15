@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import PostList from "./PostList";
+import PostList from "../components/PostList";
 import type { Post } from "../types/Post";
 import "./PostsPage.css";
-import Title from "./Title";
+import Title from "../components/Title";
 import { fakePosts } from "../data/fakePosts";
 import { useAppSelector, useAppDispatch } from "../store/store";
 import { clearBookmarks } from "../store/bookmarksSlice";

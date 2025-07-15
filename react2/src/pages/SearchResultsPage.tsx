@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import PostList from './PostList';
+import PostList from '../components/PostList';
 import type { Post } from '../types/Post';
 import './SearchResultsPage.css';
 import { fakePosts } from '../data/fakePosts';

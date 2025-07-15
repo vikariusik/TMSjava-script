@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './SinglePostPage.css';
 import type { Post } from '../types/Post';
-import BookmarkButton from './BookmarkButton';
+import BookmarkButton from '../components/BookmarkButton';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { addBookmark, removeBookmark } from '../store/bookmarksSlice';
 

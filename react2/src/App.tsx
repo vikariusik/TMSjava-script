@@ -1,9 +1,9 @@
 import "./App.css";
-import PostsPage from "./components/PostsPage";
-import LoginPage from "./components/LoginPage";
-import RegistrationPage from "./components/RegistrationPage";
-import SinglePostPage from "./components/SinglePostPage";
-import SearchResultsPage from "./components/SearchResultsPage";
+import PostsPage from "./pages/PostsPage";
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import SinglePostPage from "./pages/SinglePostPage";
+import SearchResultsPage from "./pages/SearchResultsPage";
 import Header from "./components/Header";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { useState } from "react";
