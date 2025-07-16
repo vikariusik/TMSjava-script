@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
 import PostList from "../components/PostList";
-import type { Post } from "../types/Post";
 import "./PostsPage.css";
 import Title from "../components/Title";
-import { fakePosts } from "../data/fakePosts";
 import { useAppSelector, useAppDispatch } from "../store/store";
 import { clearBookmarks } from "../store/bookmarksSlice";
+import { fetchPostsRequest, selectPosts, selectPostsLoading, selectPostsError } from "../store/postsSlice";
 
 type TabType = 'all' | 'bookmarks';
 
 const PostsPage: React.FC = () => {
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>('all');
   
   const dispatch = useAppDispatch();
+  
+  // Используем селекторы для получения данных из Redux store
+  const posts = useAppSelector(selectPosts);
+  const loading = useAppSelector(selectPostsLoading);
+  const error = useAppSelector(selectPostsError);
   const bookmarkedPosts = useAppSelector((state) => state.bookmarks.bookmarkedPosts);
 
   const handleClearBookmarks = () => {
@@ -24,28 +25,10 @@ const PostsPage: React.FC = () => {
     }
   };
 
+  // Запускаем saga для получения постов
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch(
-          "https://studapi.teachmeskills.by/blog/posts/"
-        );
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const data = await response.json();
-        const allPosts = [...data.results, ...fakePosts];
-        setPosts(allPosts);
-        
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unknown error');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+    dispatch(fetchPostsRequest());
+  }, [dispatch]);
 
   if (loading) {
     return <div>Loading posts...</div>;

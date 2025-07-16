@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom';
 import PostList from '../components/PostList';
 import type { Post } from '../types/Post';
 import './SearchResultsPage.css';
-import { fakePosts } from '../data/fakePosts';
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { fetchPostsRequest } from '../store/postsSlice';
 
 const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -12,18 +13,15 @@ const SearchResultsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const searchQuery = searchParams.get('q') || '';
 
+  const allPosts = useAppSelector((state) => state.posts.posts);
+
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
     const searchPosts = async () => {
       try {
         setLoading(true);
-        const response = await fetch('https://studapi.teachmeskills.by/blog/posts/');
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const data = await response.json();
-        
-        // Combine API posts with fake posts
-        const allPosts = [...data.results, ...fakePosts];
+        dispatch(fetchPostsRequest());
         
         // Filter posts based on search query
         const filteredPosts = allPosts.filter((post: Post) =>
