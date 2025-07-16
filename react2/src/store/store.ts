@@ -6,6 +6,7 @@ import usersReducer from './userSlice'
 import imageReducer from './ImageSlice'
 import bookmarksReducer from './bookmarksSlice'
 import postsReducer from './postsSlice'
+import userProfileReducer from './userProfileSlice'
 import rootSaga from './rootSaga'
 
 // Создаем saga middleware
@@ -18,10 +19,11 @@ export const store = configureStore({
     image: imageReducer,
     bookmarks: bookmarksReducer,
     posts: postsReducer,
+    userProfile: userProfileReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      thunk: false, // Отключаем thunk так как используем saga
+      thunk: true, // Включаем thunk для userProfile
     }).concat(sagaMiddleware),
 })
 

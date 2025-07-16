@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../context/ThemeContext";
-import { useAppSelector } from "../store/store";
+import { useAppSelector, useAppDispatch } from "../store/store";
+import { fetchUserProfile, selectUserProfile } from "../store/userProfileSlice";
+import UserProfile from "./UserProfile";
 import './Header.css';
 
 interface HeaderProps {
@@ -9,11 +11,22 @@ interface HeaderProps {
   handleLogoutClick: () => void;
 }
 
-const Header = ({ isLoggedIn, handleLogoutClick }) => {
+const Header = ({ isLoggedIn, handleLogoutClick }: HeaderProps) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { isDarkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  
   const bookmarkedPosts = useAppSelector((state) => state.bookmarks.bookmarkedPosts);
+  const userProfile = useAppSelector(selectUserProfile);
+
+  // Загружаем профиль пользователя при авторизации
+  useEffect(() => {
+    if (isLoggedIn && !userProfile) {
+      // Загружаем профиль пользователя с ID 1 (можно изменить логику)
+      dispatch(fetchUserProfile(1));
+    }
+  }, [isLoggedIn, userProfile, dispatch]);
 
   const handleGoToRegistration = () => {
     navigate('/registration');
@@ -21,6 +34,10 @@ const Header = ({ isLoggedIn, handleLogoutClick }) => {
 
   const handleGoToPosts = () => {
     navigate('/posts');
+  };
+
+  const handleLoadProfile = () => {
+    dispatch(fetchUserProfile(1));
   };
 
   const handleSearch = (e: React.FormEvent) => {
@@ -65,7 +82,7 @@ const Header = ({ isLoggedIn, handleLogoutClick }) => {
           </form>
         </div>
       )}
-            <div className="header-right">
+      <div className="header-right">
         {isLoggedIn && bookmarkedPosts.length > 0 && (
           <div className="bookmarks-indicator">
             <span className="bookmark-icon">★</span>
@@ -75,6 +92,12 @@ const Header = ({ isLoggedIn, handleLogoutClick }) => {
         <button onClick={toggleTheme} className="theme-toggle-button">
           {isDarkMode ? '☀️' : '🌙'}
         </button>
+        {!userProfile && (
+          <button onClick={handleLoadProfile} className="primary-button">
+            Load Profile
+          </button>
+        )}
+        {isLoggedIn && <UserProfile onLogout={handleLogoutClick} />}
       </div>
     </header>
   );
