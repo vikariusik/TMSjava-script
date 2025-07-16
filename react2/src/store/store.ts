@@ -1,10 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
+import createSagaMiddleware from 'redux-saga'
 import counterReducer from './counterSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import usersReducer from './userSlice'
 import imageReducer from './ImageSlice'
 import bookmarksReducer from './bookmarksSlice'
+import postsReducer from './postsSlice'
+import userProfileReducer from './userProfileSlice'
+import rootSaga from './rootSaga'
 
+// Создаем saga middleware
+const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
   reducer: {
@@ -12,8 +18,17 @@ export const store = configureStore({
     users : usersReducer,
     image: imageReducer,
     bookmarks: bookmarksReducer,
-  }
+    posts: postsReducer,
+    userProfile: userProfileReducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      thunk: true, // Включаем thunk для userProfile
+    }).concat(sagaMiddleware),
 })
+
+// Запускаем saga
+sagaMiddleware.run(rootSaga)
 
 
 export type RootState = ReturnType<typeof store.getState>

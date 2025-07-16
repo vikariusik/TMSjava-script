@@ -1,0 +1,217 @@
+.create-user-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+.create-user-form__title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1a73e8;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.create-user-form__success {
+  background: #e8f5e8;
+  color: #2e7d2e;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #4caf50;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.create-user-form__error {
+  background: #ffebee;
+  color: #c62828;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #f44336;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.create-user-form__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.create-user-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.create-user-form__label {
+  font-weight: 500;
+  color: #202124;
+  font-size: 0.875rem;
+  letter-spacing: 0.25px;
+}
+
+.create-user-form__input {
+  padding: 0.75rem 1rem;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.create-user-form__input:focus {
+  outline: none;
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+}
+
+.create-user-form__input--error {
+  border-color: #ea4335;
+  background: #fef7f0;
+}
+
+.create-user-form__input--error:focus {
+  border-color: #ea4335;
+  box-shadow: 0 0 0 3px rgba(234, 67, 53, 0.1);
+}
+
+.create-user-form__field-error {
+  color: #ea4335;
+  font-size: 0.75rem;
+  font-weight: 400;
+  margin-top: 0.25rem;
+  padding-left: 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.create-user-form__field-error::before {
+  content: "⚠";
+  font-size: 0.875rem;
+}
+
+.create-user-form__submit {
+  padding: 0.875rem 1.5rem;
+  background: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+  font-family: inherit;
+}
+
+.create-user-form__submit:hover:not(:disabled) {
+  background: #1557b0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(26, 115, 232, 0.3);
+}
+
+.create-user-form__submit:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(26, 115, 232, 0.3);
+}
+
+.create-user-form__submit:disabled {
+  background: #9aa0a6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .create-user-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .create-user-form__title {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .create-user-form__input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+  
+  .create-user-form__submit {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .create-user-form {
+    background: #2d2e30;
+    color: #e8eaed;
+  }
+  
+  .create-user-form__title {
+    color: #8ab4f8;
+  }
+  
+  .create-user-form__label {
+    color: #e8eaed;
+  }
+  
+  .create-user-form__input {
+    background: #3c4043;
+    border-color: #5f6368;
+    color: #e8eaed;
+  }
+  
+  .create-user-form__input:focus {
+    border-color: #8ab4f8;
+    box-shadow: 0 0 0 3px rgba(138, 180, 248, 0.1);
+  }
+  
+  .create-user-form__input--error {
+    border-color: #f28b82;
+    background: #3c2415;
+  }
+  
+  .create-user-form__input--error:focus {
+    border-color: #f28b82;
+    box-shadow: 0 0 0 3px rgba(242, 139, 130, 0.1);
+  }
+  
+  .create-user-form__field-error {
+    color: #f28b82;
+  }
+  
+  .create-user-form__success {
+    background: #1e3a1e;
+    color: #81c784;
+    border-color: #4caf50;
+  }
+  
+  .create-user-form__error {
+    background: #3c1f1f;
+    color: #f28b82;
+    border-color: #f44336;
+  }
+  
+  .create-user-form__submit {
+    background: #8ab4f8;
+    color: #202124;
+  }
+  
+  .create-user-form__submit:hover:not(:disabled) {
+    background: #aecbfa;
+  }
+}
