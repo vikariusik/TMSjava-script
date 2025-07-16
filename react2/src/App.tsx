@@ -7,7 +7,7 @@ import SearchResultsPage from "./pages/SearchResultsPage";
 import Header from "./components/Header";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import ImageModal from "./components/ImageModal";
 

@@ -3,8 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import PostList from '../components/PostList';
 import type { Post } from '../types/Post';
 import './SearchResultsPage.css';
-import { useAppDispatch, useAppSelector } from '../store/store';
-import { fetchPostsRequest } from '../store/postsSlice';
+import { postsAPI } from '../services/api';
 
 const SearchResultsPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -13,65 +12,63 @@ const SearchResultsPage: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const searchQuery = searchParams.get('q') || '';
 
-  const allPosts = useAppSelector((state) => state.posts.posts);
-
-  const dispatch = useAppDispatch();
-
   useEffect(() => {
     const searchPosts = async () => {
       try {
         setLoading(true);
-        dispatch(fetchPostsRequest());
+        setError(null);
         
-        // Filter posts based on search query
-        const filteredPosts = allPosts.filter((post: Post) =>
-          post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          post.text.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        
-        setPosts(filteredPosts);
+        if (searchQuery.trim()) {
+          const response = await postsAPI.searchPosts(searchQuery);
+          setPosts(response.results);
+        } else {
+          setPosts([]);
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
+        setPosts([]);
       } finally {
         setLoading(false);
       }
     };
 
-    if (searchQuery) {
-      searchPosts();
-    } else {
-      setPosts([]);
-      setLoading(false);
-    }
+    searchPosts();
   }, [searchQuery]);
 
   if (loading) {
-    return <div className="search-loading">Searching posts...</div>;
+    return <div className="search-results-loading">Searching posts...</div>;
   }
 
   if (error) {
-    return <div className="search-error">Error searching posts: {error}</div>;
+    return <div className="search-results-error">Error: {error}</div>;
   }
 
   return (
     <div className="search-results-page">
-      <h1>Search Results</h1>
-      {searchQuery && (
+      <div className="search-results-header">
+        <h1>Search Results</h1>
         <p className="search-query">
-          Results for: "<strong>{searchQuery}</strong>"
+          {searchQuery ? `Showing results for: "${searchQuery}"` : 'Enter a search query'}
         </p>
-      )}
-      
-      {posts.length > 0 ? (
-        <>
-          <p className="search-count">{posts.length} post(s) found</p>
+        <p className="search-count">
+          {posts.length} post{posts.length !== 1 ? 's' : ''} found
+        </p>
+      </div>
+
+      <div className="search-results-content">
+        {posts.length > 0 ? (
           <PostList posts={posts} />
-        </>
-      ) : (
-        <div className="no-results">
-          {searchQuery ? 'No posts found matching your search.' : 'Please enter a search term.'}
-        </div>
-      )}
+        ) : searchQuery ? (
+          <div className="no-results">
+            <p>No posts found matching your search.</p>
+            <p>Try different keywords or check your spelling.</p>
+          </div>
+        ) : (
+          <div className="no-search">
+            <p>Enter a search query to find posts.</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
