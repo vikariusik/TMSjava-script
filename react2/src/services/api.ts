@@ -1,6 +1,7 @@
 import axios from 'axios';
 import type { ApiResponse } from '../types/ApiTypes';
 import type { Post } from '../types/Post';
+import type { CreateUserFormData, CreateUserResponse } from '../types/CreateUser';
 
 // Создаем экземпляр axios с базовой конфигурацией
 const api = axios.create({
@@ -47,6 +48,23 @@ export const postsAPI = {
     const response = await api.get<ApiResponse<Post>>('/posts/?limit=100', {
       params: { search: query }
     });
+    return response.data;
+  },
+};
+
+// API методы для пользователей
+export const usersAPI = {
+  // Создать нового пользователя
+  createUser: async (userData: CreateUserFormData): Promise<CreateUserResponse> => {
+    const response = await axios.post<CreateUserResponse>(
+      'https://jsonplaceholder.typicode.com/users',
+      userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
     return response.data;
   },
 };

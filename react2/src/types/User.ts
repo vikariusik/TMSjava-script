@@ -27,4 +27,7 @@ export interface UserProfileState {
   profile: UserProfile | null;
   loading: boolean;
   error: string | null;
+  createLoading: boolean;
+  createError: string | null;
+  createSuccess: boolean;
 }

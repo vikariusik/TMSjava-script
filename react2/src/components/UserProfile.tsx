@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { selectUserProfile, selectUserLoading, clearProfile } from '../store/userProfileSlice';
 import './UserProfile.css';
+import { useNavigate } from 'react-router-dom';
 
 interface UserProfileProps {
   onLogout?: () => void;
@@ -11,6 +12,12 @@ const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
+
+  const navigate = useNavigate();
+
+  const handleGoToCreateUser = () => {
+    navigate('/create-user');
+  };
   
   const userProfile = useAppSelector(selectUserProfile);
   const isUserLoading = useAppSelector(selectUserLoading);
@@ -96,6 +103,9 @@ const UserProfile: React.FC<UserProfileProps> = ({ onLogout }) => {
           >
             Sign out
           </button>
+          <button onClick={handleGoToCreateUser} className="user-profile__logout">
+              Create User
+            </button>
         </div>
       )}
     </div>
