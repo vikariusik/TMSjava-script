@@ -57,7 +57,7 @@ const PostCard: React.FC<PostCardProps> = ({
       </div>
       <div className="post-card_date">Date: {post.date}</div>
       <h2>{post.title}</h2>
-      <div className="post-card_text">{post.text}</div>
+      <div className="post-card_text">{post.description}</div>
     </Link>
   );
 };

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './SinglePostPage.css';
 import type { Post } from '../types/Post';
-import BookmarkButton from './BookmarkButton';
+import BookmarkButton from '../components/BookmarkButton';
 import { useAppDispatch, useAppSelector } from '../store/store';
 import { addBookmark, removeBookmark } from '../store/bookmarksSlice';
+import { postsAPI } from '../services/api';
 
 const SinglePostPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -34,11 +35,7 @@ const SinglePostPage: React.FC = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`https://studapi.teachmeskills.by/blog/posts/${id}/`);
-        if (!response.ok) {
-          throw new Error(`Error: ${response.status}`);
-        }
-        const data = await response.json();
+        const data = await postsAPI.getPostById(id!);
         setPost(data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Unknown error');
@@ -47,7 +44,9 @@ const SinglePostPage: React.FC = () => {
       }
     };
 
-    fetchPost();
+    if (id) {
+      fetchPost();
+    }
   }, [id]);
 
   if (loading) {
@@ -73,7 +72,7 @@ const SinglePostPage: React.FC = () => {
         />
       </div>
       <h1>{post.title}</h1>
-      <div>{post.text}</div>
+      <div>{post.description}</div>
       <div className="single-post__date">Date: {post.date}</div>
     </div>
   );

@@ -1,13 +1,14 @@
 import "./App.css";
-import PostsPage from "./components/PostsPage";
-import LoginPage from "./components/LoginPage";
-import RegistrationPage from "./components/RegistrationPage";
-import SinglePostPage from "./components/SinglePostPage";
-import SearchResultsPage from "./components/SearchResultsPage";
+import PostsPage from "./pages/PostsPage";
+import LoginPage from "./pages/LoginPage";
+import RegistrationPage from "./pages/RegistrationPage";
+import SinglePostPage from "./pages/SinglePostPage";
+import SearchResultsPage from "./pages/SearchResultsPage";
+import CreateUserPage from "./pages/CreateUserPage";
 import Header from "./components/Header";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import { useState } from "react";
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import ImageModal from "./components/ImageModal";
 
@@ -34,6 +35,7 @@ const AppContent: React.FC = () => {
         <main className="app-main">
           <Routes>
             <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/create-user" element={<CreateUserPage />} />
             <Route path="/login" element={<LoginPage setIsLoggedIn={handleLogin} />} />
             <Route element={<PrivateRoute />}>
               <Route
