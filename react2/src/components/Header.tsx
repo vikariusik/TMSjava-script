@@ -36,10 +36,6 @@ const Header = ({ isLoggedIn, handleLogoutClick }: HeaderProps) => {
     navigate('/posts');
   };
 
-  const handleGoToCreateUser = () => {
-    navigate('/create-user');
-  };
-
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -92,16 +88,6 @@ const Header = ({ isLoggedIn, handleLogoutClick }: HeaderProps) => {
         <button onClick={toggleTheme} className="theme-toggle-button">
           {isDarkMode ? '☀️' : '🌙'}
         </button>
-        {!userProfile && (
-          <>
-            <button onClick={() => dispatch(fetchUserProfile(1))} className="primary-button">
-              Load Profile
-            </button>
-            <button onClick={handleGoToCreateUser} className="primary-button">
-              Create User
-            </button>
-          </>
-        )}
         {isLoggedIn && <UserProfile onLogout={handleLogoutClick} />}
       </div>
     </header>
