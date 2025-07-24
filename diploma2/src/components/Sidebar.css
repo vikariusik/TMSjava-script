@@ -1,0 +1,146 @@
+.sidebar {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  height: fit-content;
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.clear-all-btn {
+  font-size: 12px;
+  padding: 4px 8px;
+  background: var(--danger-color);
+  color: white;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.clear-all-btn:hover:not(:disabled) {
+  background: #c82333;
+}
+
+.results-count {
+  background: var(--light-color);
+  padding: 12px;
+  border-radius: var(--border-radius);
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.filter-section {
+  margin-bottom: 24px;
+}
+
+.filter-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 12px 0;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease;
+}
+
+.filter-option:hover {
+  background: var(--light-color);
+}
+
+.filter-radio {
+  margin: 0;
+  cursor: pointer;
+}
+
+.filter-label {
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: white;
+  font-size: 14px;
+  color: #333;
+}
+
+.filter-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.filter-select:disabled,
+.filter-radio:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.filter-info {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-color);
+}
+
+.filter-note {
+  color: #999;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 16px;
+  }
+  
+  .sidebar-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .clear-all-btn {
+    align-self: flex-end;
+  }
+}
