@@ -1,9 +1,11 @@
 import { useState, useCallback } from 'react';
-import { omdbService } from '../services/omdbService';
-import type { Movie, SearchFilters, ApiError } from '../types/movie';
+import { useLazySearchMoviesQuery } from '../store/api/omdbApi';
+import { useAppDispatch, useAppSelector } from './redux';
+import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
+import type { SearchFilters } from '../types/movie';
 
 interface UseMovieSearchReturn {
-  movies: Movie[];
+  movies: any[];
   loading: boolean;
   error: string | null;
   searchQuery: string;
@@ -18,79 +20,61 @@ interface UseMovieSearchReturn {
 }
 
 export const useMovieSearch = (): UseMovieSearchReturn => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-  const [searchQuery, setSearchQuery] = useState<string>('');
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const [totalResults, setTotalResults] = useState<number>(0);
-  const [filters, setFilters] = useState<SearchFilters>({
-    type: '',
-    year: ''
-  });
+  const dispatch = useAppDispatch();
+  const { query, filters, currentPage } = useAppSelector(state => state.search);
+  
+  const [searchMovies, { data: searchResult, isLoading, error: rtqError, isFetching }] = useLazySearchMoviesQuery();
+  const [localError, setLocalError] = useState<string | null>(null);
 
-  const searchMovies = useCallback(async (
-    query: string, 
-    page: number = 1, 
-    newFilters: SearchFilters = filters
-  ) => {
-    if (!query.trim()) {
-      setMovies([]);
-      setTotalPages(0);
-      setTotalResults(0);
-      return;
+  const handleSearch = useCallback((newQuery: string) => {
+    dispatch(setQuery(newQuery));
+    if (newQuery.trim()) {
+      searchMovies({
+        query: newQuery,
+        page: 1,
+        filters
+      });
     }
-
-    setLoading(true);
-    setError(null);
-
-    try {
-      const result = await omdbService.searchMovies(query, page, newFilters);
-      
-      setMovies(result.movies);
-      setCurrentPage(result.currentPage);
-      setTotalPages(result.totalPages);
-      setTotalResults(result.totalResults);
-    } catch (err) {
-      const apiError = err as ApiError;
-      setError(apiError.message);
-      setMovies([]);
-      setTotalPages(0);
-      setTotalResults(0);
-    } finally {
-      setLoading(false);
-    }
-  }, [filters]);
-
-  const handleSearch = useCallback((query: string) => {
-    setSearchQuery(query);
-    setCurrentPage(1);
-    searchMovies(query, 1, filters);
-  }, [filters, searchMovies]);
+  }, [dispatch, filters, searchMovies]);
 
   const handlePageChange = useCallback((page: number) => {
-    setCurrentPage(page);
-    searchMovies(searchQuery, page, filters);
-  }, [searchQuery, filters, searchMovies]);
+    dispatch(setCurrentPage(page));
+    if (query) {
+      searchMovies({
+        query,
+        page,
+        filters
+      });
+    }
+  }, [dispatch, query, filters, searchMovies]);
 
   const handleFiltersChange = useCallback((newFilters: SearchFilters) => {
-    setFilters(newFilters);
-    setCurrentPage(1);
-    if (searchQuery) {
-      searchMovies(searchQuery, 1, newFilters);
+    dispatch(setFilters(newFilters));
+    if (query) {
+      searchMovies({
+        query,
+        page: 1,
+        filters: newFilters
+      });
     }
-  }, [searchQuery, searchMovies]);
+  }, [dispatch, query, searchMovies]);
 
   const clearError = useCallback(() => {
-    setError(null);
+    setLocalError(null);
   }, []);
+
+  // Объединяем данные из RTK Query и Redux state
+  const movies = searchResult?.movies || [];
+  const totalPages = searchResult?.totalPages || 0;
+  const totalResults = searchResult?.totalResults || 0;
+  const loading = isLoading || isFetching;
+  const error = rtqError ? 'Error loading movies' : localError;
 
   return {
     movies,
     loading,
     error,
-    searchQuery,
+    searchQuery: query,
     currentPage,
     totalPages,
     totalResults,

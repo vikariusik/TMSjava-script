@@ -47,7 +47,6 @@ const Filters: React.FC<FiltersProps> = ({ filters, onFiltersChange, disabled = 
           <option value="movie">Фильмы</option>
           <option value="series">Сериалы</option>
           <option value="episode">Эпизоды</option>
-          <option value="game">Игры</option>
         </select>
       </div>
 

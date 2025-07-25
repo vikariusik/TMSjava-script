@@ -11,9 +11,6 @@ const Header: React.FC = () => {
           </Link>
           <nav className="header-nav">
             <Link to="/" className="nav-link">Главная</Link>
-            <a href="#" className="nav-link">Фильмы</a>
-            <a href="#" className="nav-link">Сериалы</a>
-            <a href="#" className="nav-link">Топ</a>
           </nav>
         </div>
       </div>

@@ -68,8 +68,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           {[
             { value: 'movie', label: 'Фильмы' },
             { value: 'series', label: 'Сериалы' },
-            { value: 'episode', label: 'Эпизоды' },
-            { value: 'game', label: 'Игры' }
+            { value: 'episode', label: 'Эпизоды' }
           ].map(option => (
             <label key={option.value} className="filter-option">
               <input

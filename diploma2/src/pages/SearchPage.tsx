@@ -131,7 +131,7 @@ const SearchPage: React.FC = () => {
                     <div className="welcome-icon">🎬</div>
                     <h2 className="welcome-title">Добро пожаловать в MovieFinder!</h2>
                     <p className="welcome-text">
-                      Введите название фильма, сериала или игры в поле поиска выше, 
+                      Введите название фильма, сериала в поле поиска выше, 
                       чтобы найти интересующий вас контент.
                     </p>
                     <div className="welcome-features">

@@ -1,33 +1,73 @@
-# React + TypeScript + Vite
+# Movie Search App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite приложение для поиска фильмов с использованием OMDB API.
 
-Currently, two official plugins are available:
+## Функциональность
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Поиск фильмов** - поиск по названию с поддержкой пагинации
+- **Детальная страница фильма** - подробная информация о фильме с постером, рейтингами и описанием
+- **Фильтрация** - фильтр по типу (фильм, сериал, эпизод, игра) и году выпуска
+- **Респонсивный дизайн** - адаптивная верстка для всех устройств
 
-## Expanding the ESLint configuration
+## Технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend**: React 18, TypeScript, React Router
+- **Сборка**: Vite
+- **API**: OMDB API (The Open Movie Database)
+- **Стилизация**: Vanilla CSS с CSS Modules
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Установка и запуск
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+1. Клонируйте репозиторий
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
+3. Запустите проект в режиме разработки:
+   ```bash
+   npm run dev
+   ```
+4. Откройте http://localhost:5173 в браузере
 
-      // Other configs...
-    ],
+## Сборка для продакшена
+
+```bash
+npm run build
+```
+
+## API
+
+Приложение использует [OMDB API](http://www.omdbapi.com/) для получения информации о фильмах.
+API ключ: `99ff31e8`
+
+## Структура проекта
+
+```
+src/
+├── components/          # React компоненты
+│   ├── SearchBar/      # Компонент поиска
+│   ├── Filters/        # Компонент фильтров
+│   ├── MovieCard/      # Карточка фильма
+│   ├── Pagination/     # Пагинация
+│   ├── Loading/        # Индикатор загрузки
+│   └── ErrorMessage/   # Компонент ошибки
+├── pages/              # Страницы приложения
+│   ├── SearchPage/     # Главная страница поиска
+│   └── MovieDetailsPage/ # Страница деталей фильма
+├── hooks/              # Пользовательские хуки
+│   ├── useMovieSearch/ # Хук для поиска фильмов (Redux-совместимый)
+│   ├── useMovieDetails/ # Хук для деталей фильма (RTK Query)
+│   └── redux.ts        # Типизированные Redux хуки
+├── store/              # Redux Store
+│   ├── api/           # RTK Query API
+│   │   └── omdbApi.ts # OMDB API с Axios интеграцией
+│   ├── slices/        # Redux Slices
+│   │   └── searchSlice.ts # Состояние поиска
+│   └── index.ts       # Конфигурация store
+├── types/              # TypeScript типы
+│   └── movie.ts        # Типы для фильмов и API
+└── App.tsx             # Главный компонент
+```
     languageOptions: {
       parserOptions: {
         project: ['./tsconfig.node.json', './tsconfig.app.json'],

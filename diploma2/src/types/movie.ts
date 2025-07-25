@@ -47,7 +47,7 @@ export interface MovieDetailsResponse extends MovieDetails {
 }
 
 export interface SearchFilters {
-  type: '' | 'movie' | 'series' | 'episode' | 'game';
+  type: '' | 'movie' | 'series' | 'episode';
   year: string;
 }
 

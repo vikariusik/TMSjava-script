@@ -60,7 +60,7 @@ export const omdbApi = createApi({
             movies: response.Search,
             totalResults: parseInt(response.totalResults),
             currentPage: 1,
-            totalPages: Math.ceil(parseInt(response.totalResults) / 10),
+            totalPages: Math.ceil(parseInt(response.totalResults) / 12),
           };
         } else {
           throw new Error(response.Error || 'Фильмы не найдены');
