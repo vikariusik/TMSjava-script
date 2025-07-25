@@ -1,10 +1,12 @@
 import { useGetMovieDetailsQuery } from '../store/api/omdbApi';
+import { getErrorMessage } from '../utils/errorHandling';
 import type { MovieDetails } from '../types/movie';
 
 interface UseMovieDetailsReturn {
   movie: MovieDetails | null;
   loading: boolean;
   error: string | null;
+  originalError?: any; // Добавляем оригинальную ошибку
   clearError: () => void;
 }
 
@@ -21,7 +23,8 @@ export const useMovieDetails = (imdbId: string | undefined): UseMovieDetailsRetu
   return {
     movie: movie || null,
     loading: isLoading,
-    error: rtqError ? 'Error loading movie details' : null,
+    error: rtqError ? getErrorMessage(rtqError) : null,
+    originalError: rtqError,
     clearError
   };
 };

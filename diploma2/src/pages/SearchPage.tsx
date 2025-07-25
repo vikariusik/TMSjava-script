@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/redux';
 import { useDebounce } from '../hooks/useDebounce';
 import { useLazySearchMoviesQuery } from '../store/api/omdbApi';
 import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
+import { getErrorMessage } from '../utils/errorHandling';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar';
@@ -78,7 +79,8 @@ const SearchPage: React.FC = () => {
               {error && (
                 <div className="error-container">
                   <ErrorMessage 
-                    message={typeof error === 'string' ? error : 'Произошла ошибка при поиске'}
+                    message={getErrorMessage(error)}
+                    originalError={error}
                     onRetry={() => query && searchMovies({ query, page: currentPage, filters })}
                   />
                 </div>

@@ -8,7 +8,7 @@ import './MovieDetailsPage.css';
 
 const MovieDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { movie, loading, error, clearError } = useMovieDetails(id);
+  const { movie, loading, error, originalError, clearError } = useMovieDetails(id);
 
   if (loading) {
     return (
@@ -30,7 +30,8 @@ const MovieDetailsPage: React.FC = () => {
             <Link to="/" className="breadcrumb-link">← Вернуться к поиску</Link>
           </div>
           <ErrorMessage 
-            message={typeof error === 'string' ? error : 'Фильм не найден'}
+            message={error || 'Фильм не найден'}
+            originalError={originalError}
             onRetry={() => clearError()}
           />
         </div>

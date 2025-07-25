@@ -3,6 +3,7 @@ import { useLazySearchMoviesQuery } from '../store/api/omdbApi';
 import { useAppDispatch, useAppSelector } from './redux';
 import { useDebounce } from './useDebounce';
 import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
+import { getErrorMessage } from '../utils/errorHandling';
 import type { SearchFilters } from '../types/movie';
 
 interface UseMovieSearchReturn {
@@ -65,7 +66,7 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
   const totalPages = searchResult?.totalPages || 0;
   const totalResults = searchResult?.totalResults || 0;
   const loading = isLoading || isFetching;
-  const error = rtqError ? 'Error loading movies' : localError;
+  const error = rtqError ? getErrorMessage(rtqError) : localError;
 
   return {
     movies,
