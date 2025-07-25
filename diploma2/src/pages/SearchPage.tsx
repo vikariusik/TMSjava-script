@@ -1,9 +1,4 @@
-import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { useDebounce } from '../hooks/useDebounce';
-import { useLazySearchMoviesQuery } from '../store/api/omdbApi';
-import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
-import { getErrorMessage } from '../utils/errorHandling';
+import { useMovieSearch } from '../hooks/useMovieSearch';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar';
@@ -14,38 +9,21 @@ import ErrorMessage from '../components/ErrorMessage';
 import './SearchPage.css';
 
 const SearchPage: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const { query, filters, currentPage, isSearchPerformed } = useAppSelector(state => state.search);
-  
-  // Debounce поисковый запрос с задержкой 1000ms
-  const debouncedQuery = useDebounce(query, 1000);
-  
-  const [searchMovies, { data: searchResult, isLoading, error, isFetching }] = useLazySearchMoviesQuery();
-
-  // Выполняем поиск при изменении debounced запроса или других параметров
-  useEffect(() => {
-    if (debouncedQuery && isSearchPerformed) {
-      searchMovies({
-        query: debouncedQuery,
-        page: currentPage,
-        filters
-      });
-    }
-  }, [debouncedQuery, currentPage, filters, searchMovies, isSearchPerformed]);
-
-  const handleSearch = (newQuery: string) => {
-    dispatch(setQuery(newQuery));
-  };
-
-  const handleFiltersChange = (newFilters: typeof filters) => {
-    dispatch(setFilters(newFilters));
-  };
-
-  const handlePageChange = (page: number) => {
-    dispatch(setCurrentPage(page));
-  };
-
-  const isLoadingState = isLoading || isFetching;
+  const {
+    movies,
+    loading,
+    error,
+    originalError,
+    searchQuery,
+    currentPage,
+    totalPages,
+    totalResults,
+    filters,
+    handleSearch,
+    handlePageChange,
+    handleFiltersChange,
+    clearError
+  } = useMovieSearch();
 
   return (
     <div className="search-page">
@@ -60,18 +38,18 @@ const SearchPage: React.FC = () => {
             </p>
             <SearchBar 
               onSearch={handleSearch} 
-              disabled={isLoadingState}
-              initialValue={query}
+              disabled={loading}
+              initialValue={searchQuery}
             />
           </div>
 
           <div className="page-layout">
             <aside className="sidebar-container">
-              <Sidebar
+              <Sidebar 
                 filters={filters}
                 onFiltersChange={handleFiltersChange}
-                disabled={isLoadingState}
-                totalResults={searchResult?.totalResults}
+                disabled={loading}
+                totalResults={totalResults}
               />
             </aside>
 
@@ -79,59 +57,59 @@ const SearchPage: React.FC = () => {
               {error && (
                 <div className="error-container">
                   <ErrorMessage 
-                    message={getErrorMessage(error)}
-                    originalError={error}
-                    onRetry={() => query && searchMovies({ query, page: currentPage, filters })}
+                    message={error}
+                    originalError={originalError}
+                    onRetry={() => clearError()}
                   />
                 </div>
               )}
 
-              {isLoadingState && (
+              {loading && (
                 <div className="loading-container">
                   <Loading message="Поиск фильмов..." />
                 </div>
               )}
 
-              {!isLoadingState && !error && searchResult && searchResult.movies.length > 0 && (
+              {!loading && !error && movies && movies.length > 0 && (
                 <>
                   <div className="search-results-header">
                     <h2 className="results-title">
-                      Результаты поиска "{query}"
+                      Результаты поиска "{searchQuery}"
                     </h2>
                     <div className="results-meta">
-                      Показано {searchResult.movies.length} из {searchResult.totalResults.toLocaleString()} результатов
+                      Показано {movies.length} из {totalResults.toLocaleString()} результатов
                     </div>
                   </div>
 
                   <div className="movies-grid">
-                    {searchResult.movies.map(movie => (
+                    {movies.map((movie: any) => (
                       <MovieCard key={movie.imdbID} movie={movie} />
                     ))}
                   </div>
 
-                  {searchResult.totalPages > 1 && (
+                  {totalPages > 1 && (
                     <Pagination
                       currentPage={currentPage}
-                      totalPages={searchResult.totalPages}
+                      totalPages={totalPages}
                       onPageChange={handlePageChange}
-                      disabled={isLoadingState}
+                      disabled={loading}
                     />
                   )}
                 </>
               )}
 
-              {!isLoadingState && !error && query && searchResult && searchResult.movies.length === 0 && (
+              {!loading && !error && searchQuery && movies && movies.length === 0 && (
                 <div className="no-results">
                   <div className="no-results-icon">🔍</div>
                   <h3 className="no-results-title">Ничего не найдено</h3>
                   <p className="no-results-text">
-                    По запросу "{query}" ничего не найдено. <br />
+                    По запросу "{searchQuery}" ничего не найдено. <br />
                     Попробуйте изменить поисковый запрос или настройки фильтров.
                   </p>
                 </div>
               )}
 
-              {!query && !isSearchPerformed && (
+              {!searchQuery && (
                 <div className="welcome-container">
                   <div className="welcome-content">
                     <div className="welcome-icon">🎬</div>

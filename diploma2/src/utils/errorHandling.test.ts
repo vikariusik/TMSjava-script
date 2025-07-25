@@ -1,5 +1,5 @@
 // Тестирование функции обработки ошибок
-import { getErrorMessage } from '../utils/errorHandling';
+import { getErrorMessage, shouldShowRetryButton } from '../utils/errorHandling';
 
 // Примеры различных типов ошибок для тестирования
 const testErrors = [
@@ -35,8 +35,10 @@ export const demonstrateErrorHandling = () => {
   
   testErrors.forEach((error, index) => {
     const friendlyMessage = getErrorMessage(error);
+    const showRetry = shouldShowRetryButton(error);
     console.log(`Ошибка ${index + 1}:`, error);
-    console.log(`Сообщение для пользователя: "${friendlyMessage}"\n`);
+    console.log(`Сообщение для пользователя: "${friendlyMessage}"`);
+    console.log(`Показать кнопку "Попробовать снова": ${showRetry ? 'ДА' : 'НЕТ'}\n`);
   });
 };
 

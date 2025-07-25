@@ -10,6 +10,7 @@ interface UseMovieSearchReturn {
   movies: any[];
   loading: boolean;
   error: string | null;
+  originalError?: any; // Добавляем оригинальную ошибку
   searchQuery: string;
   currentPage: number;
   totalPages: number;
@@ -72,6 +73,7 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
     movies,
     loading,
     error,
+    originalError: rtqError,
     searchQuery: query,
     currentPage,
     totalPages,
