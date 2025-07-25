@@ -1,5 +1,5 @@
 import { useParams, Link } from 'react-router-dom';
-import { useGetMovieDetailsQuery } from '../store/api/omdbApi';
+import { useMovieDetails } from '../hooks/useMovieDetails';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
@@ -8,11 +8,9 @@ import './MovieDetailsPage.css';
 
 const MovieDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { data: movie, isLoading, error, refetch } = useGetMovieDetailsQuery(id!, {
-    skip: !id
-  });
+  const { movie, loading, error, clearError } = useMovieDetails(id);
 
-  if (isLoading) {
+  if (loading) {
     return (
       <div className="movie-details-page">
         <Header />
@@ -33,7 +31,7 @@ const MovieDetailsPage: React.FC = () => {
           </div>
           <ErrorMessage 
             message={typeof error === 'string' ? error : 'Фильм не найден'}
-            onRetry={() => refetch()}
+            onRetry={() => clearError()}
           />
         </div>
       </div>
@@ -93,7 +91,7 @@ const MovieDetailsPage: React.FC = () => {
 
                 {movie.Genre !== 'N/A' && (
                   <div className="movie-genres">
-                    {movie.Genre.split(', ').map((genre, index) => (
+                    {movie.Genre.split(', ').map((genre: string, index: number) => (
                       <span key={index} className="genre-tag">{genre}</span>
                     ))}
                   </div>

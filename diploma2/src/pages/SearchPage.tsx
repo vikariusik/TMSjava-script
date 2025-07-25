@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import { useDebounce } from '../hooks/useDebounce';
 import { useLazySearchMoviesQuery } from '../store/api/omdbApi';
 import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
 import Header from '../components/Header';
@@ -15,18 +16,21 @@ const SearchPage: React.FC = () => {
   const dispatch = useAppDispatch();
   const { query, filters, currentPage, isSearchPerformed } = useAppSelector(state => state.search);
   
+  // Debounce поисковый запрос с задержкой 1000ms
+  const debouncedQuery = useDebounce(query, 1000);
+  
   const [searchMovies, { data: searchResult, isLoading, error, isFetching }] = useLazySearchMoviesQuery();
 
-  // Выполняем поиск при изменении параметров
+  // Выполняем поиск при изменении debounced запроса или других параметров
   useEffect(() => {
-    if (query && isSearchPerformed) {
+    if (debouncedQuery && isSearchPerformed) {
       searchMovies({
-        query,
+        query: debouncedQuery,
         page: currentPage,
         filters
       });
     }
-  }, [query, currentPage, filters, searchMovies, isSearchPerformed]);
+  }, [debouncedQuery, currentPage, filters, searchMovies, isSearchPerformed]);
 
   const handleSearch = (newQuery: string) => {
     dispatch(setQuery(newQuery));

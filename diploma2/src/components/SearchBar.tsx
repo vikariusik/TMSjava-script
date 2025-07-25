@@ -24,8 +24,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    setQuery(newValue);
+    onSearch(newValue); // Вызываем onSearch при каждом изменении для debounce
+  };
+
   const handleClear = () => {
     setQuery('');
+    onSearch(''); // Очищаем поиск
   };
 
   return (
@@ -35,7 +42,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleInputChange}
             placeholder={placeholder}
             className="search-input"
             disabled={disabled}

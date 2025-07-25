@@ -1,6 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useLazySearchMoviesQuery } from '../store/api/omdbApi';
 import { useAppDispatch, useAppSelector } from './redux';
+import { useDebounce } from './useDebounce';
 import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
 import type { SearchFilters } from '../types/movie';
 
@@ -23,41 +24,37 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
   const dispatch = useAppDispatch();
   const { query, filters, currentPage } = useAppSelector(state => state.search);
   
+  // Debounce поисковый запрос с задержкой 1000ms
+  const debouncedQuery = useDebounce(query, 1000);
+  
   const [searchMovies, { data: searchResult, isLoading, error: rtqError, isFetching }] = useLazySearchMoviesQuery();
   const [localError, setLocalError] = useState<string | null>(null);
 
-  const handleSearch = useCallback((newQuery: string) => {
-    dispatch(setQuery(newQuery));
-    if (newQuery.trim()) {
+  // Автоматически выполняем поиск при изменении debounced query
+  useEffect(() => {
+    if (debouncedQuery.trim()) {
       searchMovies({
-        query: newQuery,
-        page: 1,
+        query: debouncedQuery,
+        page: currentPage,
         filters
       });
     }
-  }, [dispatch, filters, searchMovies]);
+  }, [debouncedQuery, currentPage, filters, searchMovies]);
+
+  const handleSearch = useCallback((newQuery: string) => {
+    dispatch(setQuery(newQuery));
+    // Поиск будет выполнен автоматически через debounce
+  }, [dispatch]);
 
   const handlePageChange = useCallback((page: number) => {
     dispatch(setCurrentPage(page));
-    if (query) {
-      searchMovies({
-        query,
-        page,
-        filters
-      });
-    }
-  }, [dispatch, query, filters, searchMovies]);
+    // Поиск будет выполнен автоматически через useEffect
+  }, [dispatch]);
 
   const handleFiltersChange = useCallback((newFilters: SearchFilters) => {
     dispatch(setFilters(newFilters));
-    if (query) {
-      searchMovies({
-        query,
-        page: 1,
-        filters: newFilters
-      });
-    }
-  }, [dispatch, query, searchMovies]);
+    // Поиск будет выполнен автоматически через useEffect
+  }, [dispatch]);
 
   const clearError = useCallback(() => {
     setLocalError(null);

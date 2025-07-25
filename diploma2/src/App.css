@@ -76,6 +76,7 @@
 .breadcrumb-link {
   color: var(--primary-color);
   transition: color 0.2s ease;
+  padding: 0 12px;
 }
 
 .breadcrumb-link:hover {
