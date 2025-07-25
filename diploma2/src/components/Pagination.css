@@ -74,16 +74,64 @@
   text-align: center;
 }
 
+/* Мобильные устройства */
 @media (max-width: 768px) {
+  .pagination-nav {
+    margin: 24px 0;
+    gap: 10px;
+  }
+  
   .pagination {
     padding: 6px;
     gap: 2px;
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  
+  .pagination-btn {
+    min-width: 40px;
+    height: 40px;
+    font-size: 14px;
+    touch-action: manipulation; /* Улучшает отзывчивость касаний */
+  }
+  
+  .pagination-prev,
+  .pagination-next {
+    min-width: 44px;
+    font-size: 16px;
+    flex-shrink: 0; /* Не сжимаются на маленьких экранах */
+  }
+  
+  .pagination-ellipsis {
+    min-width: 40px;
+    height: 40px;
+    font-size: 14px;
+  }
+  
+  .pagination-info {
+    font-size: 12px;
+    padding: 0 8px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .pagination-nav {
+    margin: 16px 0;
+    gap: 8px;
+  }
+  
+  .pagination {
+    padding: 4px;
+    gap: 1px;
+    border-radius: 4px;
   }
   
   .pagination-btn {
     min-width: 36px;
     height: 36px;
     font-size: 13px;
+    padding: 0 6px;
   }
   
   .pagination-prev,
@@ -95,10 +143,39 @@
   .pagination-ellipsis {
     min-width: 36px;
     height: 36px;
+    font-size: 12px;
+  }
+  
+  .pagination-info {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+  .pagination-nav {
+    margin: 12px 0;
+    gap: 6px;
+  }
+  
+  .pagination {
+    padding: 4px;
+  }
+  
+  .pagination-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+  }
+  
+  .pagination-prev,
+  .pagination-next {
+    min-width: 36px;
     font-size: 13px;
   }
   
   .pagination-info {
-    font-size: 12px;
+    font-size: 10px;
   }
 }

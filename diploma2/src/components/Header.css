@@ -44,20 +44,83 @@
   background: var(--light-color);
 }
 
+/* Мобильные устройства */
 @media (max-width: 768px) {
   .header-content {
+    padding: 10px 0;
+  }
+  
+  .logo {
+    font-size: 20px;
+    gap: 6px;
+  }
+  
+  .header-nav {
+    gap: 16px;
+  }
+  
+  .nav-link {
+    font-size: 14px;
+    padding: 8px 12px;
+    min-height: 44px; /* Подходящий размер для касания */
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .app-header {
+    position: relative; /* Убираем sticky для экономии места */
+  }
+  
+  .header-content {
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    padding: 8px 0;
+  }
+  
+  .logo {
+    font-size: 18px;
   }
   
   .header-nav {
     flex-wrap: wrap;
     justify-content: center;
-    gap: 12px;
+    gap: 8px;
+    width: 100%;
   }
   
   .nav-link {
     font-size: 13px;
     padding: 6px 10px;
+    min-height: 40px;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-header {
+    position: relative;
+  }
+  
+  .header-content {
+    flex-direction: row;
+    padding: 6px 0;
+    gap: 12px;
+  }
+  
+  .logo {
+    font-size: 16px;
+  }
+  
+  .header-nav {
+    gap: 8px;
+  }
+  
+  .nav-link {
+    font-size: 12px;
+    padding: 4px 8px;
+    min-height: 32px;
   }
 }

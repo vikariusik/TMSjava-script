@@ -237,9 +237,11 @@
   text-decoration: underline;
 }
 
+/* Планшеты */
 @media (max-width: 1024px) {
   .movie-details-container {
     grid-template-columns: 1fr;
+    gap: 0;
   }
   
   .movie-poster-section {
@@ -250,53 +252,259 @@
   .poster-wrapper {
     max-width: 300px;
     position: static;
+    margin: 0 auto;
+  }
+  
+  .movie-info-section {
+    padding: 24px;
   }
 }
 
+/* Мобильные устройства */
 @media (max-width: 768px) {
   .main-content {
     padding: 16px 0;
   }
   
+  .breadcrumbs {
+    margin-bottom: 16px;
+  }
+  
+  .breadcrumb-link {
+    font-size: 13px;
+    padding: 8px 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+  }
+  
   .movie-details-container {
-    margin: 0 12px;
+    margin: 0 8px;
+    border-radius: 6px;
+  }
+  
+  .movie-poster-section {
+    padding: 16px;
+  }
+  
+  .poster-wrapper {
+    max-width: 250px;
   }
   
   .movie-info-section {
-    padding: 24px 20px;
+    padding: 20px 16px;
+  }
+  
+  .movie-header {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
   }
   
   .movie-title {
-    font-size: 28px;
+    font-size: 24px;
+    margin: 0 0 12px 0;
+    text-align: center;
   }
   
   .movie-meta-tags {
     justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .meta-tag {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+  
+  .movie-rating {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  
+  .rating-score {
+    font-size: 20px;
+  }
+  
+  .movie-plot {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 20px;
   }
   
   .movie-genres {
     justify-content: center;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  
+  .genre-tag {
+    padding: 4px 8px;
+    font-size: 11px;
   }
   
   .ratings-grid {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .rating-card {
+    padding: 12px 8px;
+  }
+  
+  .rating-source {
+    font-size: 11px;
+  }
+  
+  .rating-value {
+    font-size: 14px;
+  }
+  
+  .movie-details {
     gap: 12px;
   }
   
   .detail-row {
     grid-template-columns: 1fr;
-    gap: 8px;
-    padding: 16px;
+    gap: 6px;
+    padding: 12px;
     background: var(--light-color);
-    border-radius: var(--border-radius);
+    border-radius: 4px;
     border-bottom: none;
   }
   
   .detail-label {
-    font-size: 13px;
+    font-size: 12px;
+    font-weight: 600;
   }
   
   .detail-value {
     font-size: 13px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .main-content {
+    padding: 12px 0;
+  }
+  
+  .movie-details-container {
+    margin: 0 4px;
+    border-radius: 4px;
+  }
+  
+  .movie-poster-section {
+    padding: 12px;
+  }
+  
+  .poster-wrapper {
+    max-width: 200px;
+  }
+  
+  .movie-info-section {
+    padding: 16px 12px;
+  }
+  
+  .movie-title {
+    font-size: 20px;
+    margin: 0 0 10px 0;
+  }
+  
+  .movie-meta-tags {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .meta-tag {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+  
+  .movie-plot {
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  
+  .ratings-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .rating-card {
+    padding: 8px 6px;
+  }
+  
+  .rating-source {
+    font-size: 10px;
+  }
+  
+  .rating-value {
+    font-size: 12px;
+  }
+  
+  .detail-row {
+    padding: 10px 8px;
+    gap: 4px;
+  }
+  
+  .detail-label {
+    font-size: 11px;
+  }
+  
+  .detail-value {
+    font-size: 12px;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+  .main-content {
+    padding: 8px 0;
+  }
+  
+  .movie-details-container {
+    grid-template-columns: 300px 1fr;
+    gap: 16px;
+  }
+  
+  .movie-poster-section {
+    padding: 12px;
+  }
+  
+  .poster-wrapper {
+    max-width: 200px;
+  }
+  
+  .movie-info-section {
+    padding: 12px;
+  }
+  
+  .movie-title {
+    font-size: 18px;
+    margin: 0 0 8px 0;
+  }
+  
+  .movie-header {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+  
+  .movie-plot {
+    font-size: 12px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+  
+  .ratings-grid {
+    grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  
+  .detail-row {
+    padding: 8px;
   }
 }

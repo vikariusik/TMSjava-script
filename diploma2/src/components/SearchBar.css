@@ -80,10 +80,21 @@
   cursor: not-allowed;
 }
 
+/* Мобильные устройства */
 @media (max-width: 768px) {
+   .search-bar-container {
+    margin-bottom: 16px;
+  }
+  .search-input-wrapper {
+    border-radius: 6px;
+    min-height: 44px; /* Минимальная высота для сенсорных экранов */
+  }
+  
   .search-input {
-    padding: 12px 14px;
-    font-size: 14px;
+    padding: 12px 16px;
+    font-size: 16px; /* Предотвращает zoom на iOS */
+    min-width: 0; /* Позволяет сжиматься */
+    width: 100%;
   }
   
   .search-submit {
@@ -95,5 +106,47 @@
   .search-clear {
     padding: 0 10px;
     font-size: 14px;
+    min-width: 40px;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .search-bar-container {
+    margin-bottom: 16px;
+  }
+  
+  .search-input-wrapper {
+    border-radius: 4px;
+  }
+  
+  .search-input {
+    padding: 10px 12px;
+    font-size: 16px;
+  }
+  
+  .search-submit {
+    padding: 10px 14px;
+    min-width: 44px;
+  }
+  
+  .search-clear {
+    padding: 0 8px;
+    min-width: 36px;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+  .search-bar-container {
+    margin-bottom: 12px;
+  }
+  
+  .search-input {
+    padding: 8px 12px;
+  }
+  
+  .search-submit {
+    padding: 8px 12px;
   }
 }

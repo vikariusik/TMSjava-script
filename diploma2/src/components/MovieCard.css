@@ -92,10 +92,16 @@
   margin: 20px 0;
 }
 
+/* Мобильные устройства */
 @media (max-width: 768px) {
   .movies-grid {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 12px;
+    margin: 16px 0;
+  }
+  
+  .movie-card {
+    border-radius: 6px;
   }
   
   .movie-card-content {
@@ -104,21 +110,79 @@
   
   .movie-title {
     font-size: 13px;
+    line-height: 1.3;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
   
   .movie-year {
     font-size: 11px;
+    margin-top: 8px;
   }
   
   .movie-type-badge {
     font-size: 9px;
     padding: 3px 6px;
+    top: 6px;
+    right: 6px;
   }
 }
 
+/* Очень маленькие экраны */
 @media (max-width: 480px) {
   .movies-grid {
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 8px;
+    margin: 12px 0;
+  }
+  
+  .movie-card {
+    border-radius: 4px;
+  }
+  
+  .movie-card-content {
+    padding: 8px;
+  }
+  
+  .movie-title {
+    font-size: 12px;
+    margin: 0 0 6px 0;
+    min-height: 2.4em;
+  }
+  
+  .movie-year {
+    font-size: 10px;
+    margin-top: 6px;
+  }
+  
+  .movie-type-badge {
+    font-size: 8px;
+    padding: 2px 4px;
+    top: 4px;
+    right: 4px;
+    border-radius: 8px;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+  .movies-grid {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 6px;
+    margin: 8px 0;
+  }
+  
+  .movie-card-content {
+    padding: 6px;
+  }
+  
+  .movie-title {
+    font-size: 11px;
+    margin: 0 0 4px 0;
+    min-height: 2.2em;
+  }
+  
+  .movie-year {
+    font-size: 9px;
   }
 }
