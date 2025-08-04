@@ -3,6 +3,7 @@ import { useMovieDetails } from '../hooks/useMovieDetails';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
+import { getRatingColor } from '../utils/ratingUtils';
 import type { Rating } from '../types/movie';
 import './MovieDetailsPage.css';
 
@@ -40,13 +41,6 @@ const MovieDetailsPage: React.FC = () => {
   }
 
   const defaultPoster = 'https://via.placeholder.com/400x600/f5f5f5/999999?text=Нет+изображения';
-
-  const getRatingColor = (rating: string): string => {
-    const numRating = parseFloat(rating);
-    if (numRating >= 8) return '#28a745';
-    if (numRating >= 6) return '#ffc107';
-    return '#dc3545';
-  };
 
   const formatBoxOffice = (boxOffice: string): string => {
     if (boxOffice === 'N/A') return 'Нет данных';

@@ -47,9 +47,9 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           </div>
         </div>
         <div className="movie-card-content">
-          <h3 className="movie-title" title={movie.Title}>
+          <p className="movie-card-title" title={movie.Title}>
             {movie.Title}
-          </h3>
+          </p>
           <div className="movie-year">
             {movie.Year}
           </div>

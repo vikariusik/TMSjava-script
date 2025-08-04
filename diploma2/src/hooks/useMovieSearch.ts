@@ -62,10 +62,11 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
     setLocalError(null);
   }, []);
 
-  // Объединяем данные из RTK Query и Redux state
-  const movies = searchResult?.movies || [];
-  const totalPages = searchResult?.totalPages || 0;
-  const totalResults = searchResult?.totalResults || 0;
+  // Если query пустой, то searchResult должен быть undefined
+  const effectiveSearchResult = query.trim() ? searchResult : undefined;
+  const movies = effectiveSearchResult?.movies || [];
+  const totalPages = effectiveSearchResult?.totalPages || 0;
+  const totalResults = effectiveSearchResult?.totalResults || 0;
   const loading = isLoading || isFetching;
   const error = rtqError ? getErrorMessage(rtqError) : localError;
 
