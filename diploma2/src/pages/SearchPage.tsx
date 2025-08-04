@@ -7,6 +7,7 @@ import Pagination from '../components/Pagination';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
 import './SearchPage.css';
+import '../App.css'
 
 const SearchPage: React.FC = () => {
   const {

@@ -83,14 +83,12 @@
   color: var(--primary-hover);
 }
 
-/* Sidebar layout */
 .page-layout {
   display: grid;
   grid-template-columns: 250px 1fr;
   gap: 24px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 16px;
 }
 
 .sidebar {
@@ -101,10 +99,6 @@
   height: fit-content;
   position: sticky;
   top: 100px;
-}
-
-.content-area {
-  min-height: 600px;
 }
 
 @media (max-width: 1024px) {

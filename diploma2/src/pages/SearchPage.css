@@ -58,21 +58,14 @@
   margin-right: auto;
 }
 
-.page-layout {
-  display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
-
 .sidebar-container {
+  position: sticky;
+  top: 20px;
   height: fit-content;
-}
-
-.content-area {
-  min-height: 400px;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  z-index: 10;
+  overflow: hidden;
 }
 
 .error-container,
@@ -197,6 +190,17 @@
     gap: 20px;
   }
   
+  .sidebar-container {
+    position: static;
+    order: 2;
+    max-height: none;
+    height: auto;
+  }
+  
+  .content-area {
+    order: 1;
+  }
+  
   .movies-grid {
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   }
@@ -205,6 +209,19 @@
 @media (max-width: 768px) {
   .page-layout {
     padding: 0 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .sidebar-container {
+    position: static;
+    order: 2;
+    max-height: none;
+    height: auto;
+  }
+  
+  .content-area {
+    order: 1;
   }
   
   .search-section {
@@ -328,24 +345,6 @@
   
   .welcome-container {
     padding: 16px;
-  }
-}
-
-/* Мобильные улучшения для 768px */
-@media (max-width: 768px) {
-  .page-layout {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  
-  .sidebar-container {
-    order: 2; /* Перемещаем фильтры вниз на мобильных */
-    position: static;
-  }
-  
-  .content-area {
-    order: 1;
-    min-height: 300px;
   }
   
   .search-pending-indicator {
