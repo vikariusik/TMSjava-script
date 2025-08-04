@@ -111,3 +111,20 @@ export const shouldShowRetryButton = (error: any): boolean => {
   // Для всех остальных ошибок показываем кнопку
   return true;
 };
+
+// Функция для определения иконки ошибки
+export const getErrorIcon = (message: string): string => {
+  if (message.includes('не найдено') || message.includes('не найден')) {
+    return '🔍';
+  }
+  if (message.includes('сеть') || message.includes('подключение')) {
+    return '🌐';
+  }
+  if (message.includes('лимит') || message.includes('превышен')) {
+    return '⏰';
+  }
+  if (message.includes('доступ') || message.includes('авторизация')) {
+    return '🔒';
+  }
+  return '⚠️';
+};

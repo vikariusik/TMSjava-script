@@ -4,10 +4,10 @@ import { useAppDispatch, useAppSelector } from './redux';
 import { useDebounce } from './useDebounce';
 import { setQuery, setFilters, setCurrentPage } from '../store/slices/searchSlice';
 import { getErrorMessage } from '../utils/errorHandling';
-import type { SearchFilters } from '../types/movie';
+import type { SearchFilters, Movie } from '../types/movie';
 
 interface UseMovieSearchReturn {
-  movies: any[];
+  movies: Movie[];
   loading: boolean;
   error: string | null;
   originalError?: any; // Добавляем оригинальную ошибку
