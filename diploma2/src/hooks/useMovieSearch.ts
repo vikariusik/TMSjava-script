@@ -64,9 +64,12 @@ export const useMovieSearch = (): UseMovieSearchReturn => {
 
   // Если query пустой, то searchResult должен быть undefined
   const effectiveSearchResult = query.trim() ? searchResult : undefined;
-  const movies = effectiveSearchResult?.movies || [];
-  const totalPages = effectiveSearchResult?.totalPages || 0;
-  const totalResults = effectiveSearchResult?.totalResults || 0;
+  
+  // Если есть ошибка RTK Query, то результаты должны быть пустыми
+  const hasRTKError = !!rtqError;
+  const movies = hasRTKError ? [] : (effectiveSearchResult?.movies || []);
+  const totalPages = hasRTKError ? 0 : (effectiveSearchResult?.totalPages || 0);
+  const totalResults = hasRTKError ? 0 : (effectiveSearchResult?.totalResults || 0);
   const loading = isLoading || isFetching;
   const error = rtqError ? getErrorMessage(rtqError) : localError;
 
