@@ -1,8 +1,8 @@
 import { useParams, Link } from 'react-router-dom';
 import { useMovieDetails } from '../hooks/useMovieDetails';
-import Header from '../components/Header';
 import Loading from '../components/Loading';
 import ErrorMessage from '../components/ErrorMessage';
+import FavoriteButton from '../components/FavoriteButton';
 import { getRatingColor } from '../utils/ratingUtils';
 import type { Rating } from '../types/movie';
 import './MovieDetailsPage.css';
@@ -14,7 +14,6 @@ const MovieDetailsPage: React.FC = () => {
   if (loading) {
     return (
       <div className="movie-details-page">
-        <Header />
         <div className="container">
           <Loading message="Загрузка информации о фильме..." />
         </div>
@@ -25,7 +24,6 @@ const MovieDetailsPage: React.FC = () => {
   if (error || !movie) {
     return (
       <div className="movie-details-page">
-        <Header />
         <div className="container">
           <div className="breadcrumbs">
             <Link to="/" className="breadcrumb-link">← Вернуться к поиску</Link>
@@ -48,9 +46,7 @@ const MovieDetailsPage: React.FC = () => {
   };
 
   return (
-    <div className="movie-details-page">
-      <Header />
-      
+    <div className="movie-details-page">    
       <main className="main-content">
         <div className="container">
           <div className="breadcrumbs">
@@ -72,7 +68,19 @@ const MovieDetailsPage: React.FC = () => {
 
             <div className="movie-info-section">
               <header className="movie-header">
-                <h1 className="movie-title">{movie.Title}</h1>
+                <div className="movie-title-section">
+                  <h1 className="movie-title">{movie.Title}</h1>
+                  <FavoriteButton 
+                    movie={{
+                      imdbID: movie.imdbID,
+                      Title: movie.Title,
+                      Year: movie.Year,
+                      Type: movie.Type,
+                      Poster: movie.Poster
+                    }} 
+                    className="movie-details-favorite"
+                  />
+                </div>
                 
                 <div className="movie-meta-tags">
                   <span className="meta-tag year">{movie.Year}</span>

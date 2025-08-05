@@ -7,6 +7,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .movie-card:hover {
@@ -14,12 +15,20 @@
   box-shadow: var(--shadow-hover);
 }
 
-.movie-card-link {
+.movie-card-link,
+.movie-card-content-link {
   text-decoration: none;
   color: inherit;
+}
+
+.movie-card-link {
+  display: block;
+}
+
+.movie-card-content-link {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
 }
 
 .movie-poster-container {
@@ -44,7 +53,7 @@
 .movie-type-badge {
   position: absolute;
   top: 8px;
-  right: 8px;
+  left: 8px;
   font-size: 10px;
   padding: 4px 8px;
   color: white;
@@ -53,6 +62,7 @@
   text-transform: uppercase;
   letter-spacing: 0.5px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  width: 54px;
 }
 
 .movie-card-content {

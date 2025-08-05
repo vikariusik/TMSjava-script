@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import type { Movie } from '../types/movie';
+import FavoriteButton from './FavoriteButton';
 import './MovieCard.css';
 
 interface MovieCardProps {
@@ -31,8 +32,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
 
   return (
     <article className="movie-card">
-      <Link to={`/movie/${movie.imdbID}`} className="movie-card-link">
-        <div className="movie-poster-container">
+      <div className="movie-poster-container">
+        <Link to={`/movie/${movie.imdbID}`} className="movie-card-link">
           <img
             src={movie.Poster !== 'N/A' ? movie.Poster : defaultPoster}
             alt={movie.Title}
@@ -45,7 +46,10 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
           >
             {getTypeLabel(movie.Type)}
           </div>
-        </div>
+        </Link>
+        <FavoriteButton movie={movie} />
+      </div>
+      <Link to={`/movie/${movie.imdbID}`} className="movie-card-content-link">
         <div className="movie-card-content">
           <p className="movie-card-title" title={movie.Title}>
             {movie.Title}

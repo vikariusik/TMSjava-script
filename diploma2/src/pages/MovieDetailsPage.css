@@ -68,11 +68,24 @@
   border-bottom: 1px solid var(--border-color);
 }
 
+.movie-title-section {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 16px;
+}
+
 .movie-title {
   font-weight: 700;
   color: #333;
-  margin: 0 0 16px 0;
+  margin: 0;
   line-height: 1.2;
+  flex: 1;
+}
+
+.movie-details-favorite {
+  flex-shrink: 0;
 }
 
 .movie-meta-tags {

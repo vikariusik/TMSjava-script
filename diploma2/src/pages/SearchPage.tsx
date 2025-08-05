@@ -1,5 +1,4 @@
 import { useMovieSearch } from '../hooks/useMovieSearch';
-import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Sidebar from '../components/Sidebar';
 import MovieCard from '../components/MovieCard';
@@ -28,8 +27,6 @@ const SearchPage: React.FC = () => {
 
   return (
     <div className="search-page">
-      <Header />
-      
       <main className="main-content">
         <div className="container">
           <div className="search-section">

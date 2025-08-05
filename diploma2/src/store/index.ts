@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { omdbApi } from './api/omdbApi';
 import searchReducer from './slices/searchSlice';
+import favoritesReducer from './slices/favoritesSlice';
 
 export const store = configureStore({
   reducer: {
     search: searchReducer,
+    favorites: favoritesReducer,
     [omdbApi.reducerPath]: omdbApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
