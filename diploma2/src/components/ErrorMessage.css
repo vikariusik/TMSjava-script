@@ -1,0 +1,165 @@
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 200px;
+}
+
+.error-content {
+  text-align: center;
+  max-width: 400px;
+  padding: 2rem;
+  background: #fff5f5;
+  border: 1px solid #fed7d7;
+  border-radius: 8px;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.error-text {
+  color: #e53e3e;
+  font-size: 16px;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+}
+
+.error-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.error-retry {
+  background: #007bff;
+  color: white;
+}
+
+.error-retry:hover {
+  background: #0056b3;
+}
+
+.error-close {
+  background: #6c757d;
+  color: white;
+}
+
+.error-close:hover {
+  background: #545b62;
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
+  .error-message {
+    padding: 1.5rem 1rem;
+    min-height: 150px;
+  }
+  
+  .error-content {
+    max-width: 100%;
+    padding: 1.5rem;
+    border-radius: 6px;
+  }
+  
+  .error-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .error-text {
+    font-size: 15px;
+    margin: 0 0 1.2rem 0;
+  }
+  
+  .error-actions {
+    gap: 0.8rem;
+    flex-direction: column;
+  }
+  
+  .error-btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 16px; /* Предотвращает zoom на iOS */
+    min-height: 44px;
+    width: 100%;
+  }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 480px) {
+  .error-message {
+    padding: 1rem 0.5rem;
+    min-height: 120px;
+  }
+  
+  .error-content {
+    padding: 1rem;
+    border-radius: 4px;
+  }
+  
+  .error-icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  
+  .error-text {
+    font-size: 14px;
+    margin: 0 0 1rem 0;
+  }
+  
+  .error-actions {
+    gap: 0.6rem;
+  }
+  
+  .error-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 15px;
+    min-height: 40px;
+  }
+}
+
+/* Ландшафтная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+  .error-message {
+    padding: 0.8rem;
+    min-height: 100px;
+  }
+  
+  .error-content {
+    padding: 0.8rem;
+  }
+  
+  .error-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .error-text {
+    font-size: 13px;
+    margin: 0 0 0.8rem 0;
+  }
+  
+  .error-actions {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .error-btn {
+    padding: 0.4rem 1rem;
+    font-size: 13px;
+    min-height: 32px;
+    width: auto;
+  }
+}
